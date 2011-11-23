@@ -1,0 +1,3 @@
+I've had this documentation kicking around since May 2011, when I created it for use among the developers in my office. The guidelines described in this doucmentation are drawn from a variety of sources, and at this time represent my personal understanding of industry best practices. The goal for putting this on github is to allow the evolution of these docs to be driven by the development community.
+
+A good deal of inspiration for this project came from Isobar's "Front-end Code Standards & Best Practices", with contributions by such notables as Paul Irish and Rob Larsen (http://na.isobar.com/standards/).
