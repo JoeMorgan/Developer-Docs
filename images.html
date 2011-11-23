@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+	<head>
+		<link href="css/main.css" media="screen" rel="stylesheet" />
+<!--[if gte IE 6]>
+    <![if IE 7]>
+        <link href="css/ie7.css" media="screen" rel="stylesheet" />
+    <![endif]>
+    <![if IE 8]>
+        <link href="css/ie8.css" media="screen" rel="stylesheet" />
+    <![endif]>
+<![endif]-->		
+		<meta charset="utf-8" />	
+		<meta content="" name="keywords"/>
+		<meta content="" name="description"/>	
+		<title>Interactive Development Best Practices</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		
+		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
+		<script src="js/head.min.js"></script>
+		<script>
+			head.js(
+				{"WebFont": "http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"}, 		// Loading WebFont loader to minimize FOUT in Firefox (Google CDN)
+				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"},	// jQuery from the Google CDN
+				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
+				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
+			);
+			head.ready("WebFont", function() {
+				WebFont.load({
+					custom: {
+						families: ['SapientSansBoldRegular'],
+						urls: ['css/fonts/sapientSansBoldRegular.css']
+					}
+				});
+			});					
+		</script>			
+	</head>
+	
+	<body>
+		<div class="main-container">
+			<header>
+				<hgroup>
+					<h1>Interactive Development Best Practices</h1>
+					<h2>Joe Morgan | <time datetime="20011-03-15">March 15, 2011</time></h2>				
+				</hgroup>	
+				
+				<p>
+					Documenting best practices for interactive development is an exhaustive task, and is one that, if done effectively, would fill the pages of 
+					several books. The purpose of this guide is not to provide an all-encompassing list of best practices, but to highlight many of the most 
+					important components of a stable, high performance web page.
+				</p>
+
+			</header>
+			
+			
+			<nav>
+				<h1>Navigate This Document</h1>
+				<ul>
+					<li>
+						<a class="top-level" href="index.html" title="HTML">HTML</a>
+						<ul class="second-level">
+							<li><a href="#doctype" title="Doctype">Doctype</a></li>
+							<li>
+								<a href="#HTML5" title="HTML5">HTML5</a>
+								<ul>
+									<li><a href="#HTML5-shim" title="Making HTML5 Work">Making HTML5 Work</a></li>
+									<li><a href="#laymans-HTML5" title="The Layman's HTML5">The Layman's HTML5</a></li>
+								</ul>
+							</li>							
+							<li><a href="#XHTML-syntax" title="XHTML Syntax">XHTML Syntax</a></li>
+							<li><a href="#validation" title="HTML Validation">HTML Validation</a></li>
+							<li><a href="#deprecated" title="Avoid Deprecated Elements">Avoid Deprecated Elements</a></li>
+							<li>
+								<a href="#semantics" title="Semantics">Semantics</a>
+								<ul>
+									<li><a href="#document-outline" title="Document Outline">Document Outline</a></li>
+									<li><a href="#header-tags" title="Header Tags in HTML5 and XHTML">Header Tags in HTML5 and XHTML</a></li>
+									<li><a href="#tables-for-data" title="Use Tables for Tabular Data">Use Tables for Tabular Data</a></li>
+									<li><a href="#avoid-unnecessary-elements" title="Avoid Unnecessary Elements">Avoid Unnecessary Elements</a></li>
+								</ul>
+							</li>
+							<li><a href="#unnecessary-classes" title="Avoid Unnecessary Classes and IDs">Avoid Unnecessary Classes and IDs</a></li>
+							<li><a href="#image-tags" title="Image Tags">Image Tags</a></li>
+							<li><a href="#miscellaneous-guidelines" title="Miscellaneous Guidelines">Miscellaneous Guidelines</a></li>
+						</ul>
+					</li>
+					<li class="active">
+						<a class="top-level" href="#images" title="Images">Images</a>
+						<ul class="second-level">
+							<li><a href="#image-size" title="Image Size">Image Size</a></li>
+							<li><a href="#image-format" title="Image Formats">Image Formats</a></li>
+							<li><a href="#CSS-sprites" title="Leverage CSS Sprites">Leverage CSS Sprites</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="css.html" title="CSS">CSS</a>
+						<ul class="second-level">
+							<li><a href="#inline-styles" title="Inline Styles">Inline Styles</a></li>
+							<li><a href="#external-css" title="Place All CSS Within the &lt;head&gt;">Place All CSS Within the <code>&lt;head&gt;</code></a></li>
+							<li><a href="#combine-stylesheets" title="Combine CSS Files">Combine CSS Files</a></li>
+							<li><a href="#link-vs-import" title="Use &lt;link&gt; to Include CSS, Not @import">Use <code>&lt;link&gt;</code> to Include CSS, Not <code>@import</code></a></li>
+							<li><a href="#reset" title="Use a CSS Reset">Use a CSS Reset</a></li>
+							<li><a href="#font-sizes" title="Specifying Font Sizes">Specifying Font Sizes</a></li>
+							<li><a href="#writing-good-selectors" title="Writing Good Selectors">Writing Good Selectors</a></li>
+							<li><a href="#shorthand" title="Shorthand">Shorthand</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="javascript.html" title="JavaScript">JavaScript</a>
+						<ul class="second-level">
+							<li><a href="#use-external-js" title="Restrict JavaScript to External Files">Restrict JavaScript to External Files</a></li>
+							<li>
+								<a href="#place-external-js" title="Placement of External JavaScript Files">Placement of External JavaScript Files</a>
+								<ul>
+									<li><a href="#end-of-page" title="Include JavaScript near the end of the page">Include JavaScript near the end of the page</a></li>
+									<li><a href="#js-loader" title="Use a JavaScript loader">Use a JavaScript loader</a></li>
+								</ul>
+							</li>	
+							<li><a href="#use-jquery" title="Use jQuery">Use jQuery</a></li>
+							<li><a href="#organize-code" title="Organize Your Code">Organize Your Code</a></li>
+							<li><a href="#general-js" title="General Coding Practices">General Coding Practices</a></li>
+						</ul>					
+					</li>
+				</ul>
+			</nav>
+			
+			
+			<section id="images">
+				<h1>Images</h1>
+				
+				<p>
+					Images often account for the bulk of a web page, in terms of file size and number of server requests. In terms of performance, it pays to spend a 
+					little extra time optimizing the images that you use, and thinking about the ways that you use them.
+				</p>
+				
+				<ul class="recs">
+					<li>		
+						<h2 id="image-size">Image Size</h2>
+						<p>
+							Thought should go into the dimensions of each image file. If an image file is 400 pixels wide and 400 pixels tall, but the largest version 
+							of the image shown on the web page is 200 by 200, then bandwidth is being wasted. If the image might potentially show up in different sizes (as
+							is often the case with thumbnails), then it might sometimes make sense to have two different versions of the file. 
+						</p>
+						<p>	
+							For instance, if the initial view of the page shows only thumbnails, and larger versions are shown upon some user interaction (in response to some 
+							JavaScript event), then it would probably be best to have images created at thumbnail size, then lazy-load separate full-sized versions with 
+							JavaScript after the initial page load has finished. This allows the page to appear to render more quickly than if full-sized images were loaded
+							at the start and simply scaled down for the thumbnails. Other factors, such as the number of thumbnail/full-size image pairs present, should go into
+							determining whether or not to take this kind of approach.
+						</p>
+					</li>
+					<li>					
+						<h2 id="image-format">Image Formats</h2>
+						<p>
+							There are four main image formats that should be used, detailed here:
+						</p>
+						<dl>
+							<dt>JPEG</dt>
+							<dd>
+								<p>
+									This will cover all photography-based images, such as shots of people and other real world objects, or anything with a very high color count.
+								</p>
+							</dd>
+							
+							<dt>24-bit PNG</dt>
+							<dd>
+								<p>
+									This high-color count format fully supports graded opacity by pixel. It is a very heavy format in terms of file size, and its use is only
+									recommended when areas of an image must be partially transparent, and more than 256 colors are present in the image.
+								</p>
+								<p>
+									Internet Explorer 6 does not support the PNG24 format. Transparent areas of the image will show up as gray in that browser, which is never
+									acceptable. There are a number of "fixes" that use JavaScript, Microsoft proprietary CSS filters, or even Flash to make IE6 play nicely with
+									PNG24 images, but all such fixes are slow, heavy, occasionally tricky to implement, and lack support for some CSS properties such as 
+									<code>background-position</code>. 
+								</p>
+								<p>
+									<strong>It is strongly recommended</strong> that you use a fallback GIF or PNG8 (see below) for IE6 instead of attempting to force
+									PNG24 support.
+								</p>
+							</dd>
+							
+							<dt>8-bit PNG</dt>
+							<dd>
+								<p>
+									When an image is made up of 256 colors or less, as is often the case with logos and other designed assets, PNG8 is usually the most appropriate 
+									format to use. PNG8 is a lot more compressible than GIF (using tools like pngcrush and pngquant). This format also allows graded opacity in 
+									nearly all browsers, but in IE6, those semi-opaque pixels are just shown as 100% transparent. 
+								</p>
+								<p>
+									Photoshop cannot output these semi-opaque files correctly but Fireworks can. More detail is provided in an   
+									<a href="http://www.sitepoint.com/blogs/2007/09/18/png8-the-clear-winner/" target="_blank" title="Sitepoint article on PNG8">article on Sitepoint</a>.
+								</p>
+							</dd>
+							
+							<dt>Transparent GIF 89a</dt>
+							<dd>
+								<p>
+									GIF 89a offers the flexibility of transparency and wide browser support, but the constraints of no graded opacity nor a color depth above 256. 
+									In our experience, a color depth of 64 still provides very good quality thumbnails, and keeps the file size comparably small. 
+								</p>
+							</dd>
+						</dl>	
+						<p>
+							All low-color count imagery such as icons or thematic graphics should be done in PNG8, as it's the most size-efficient of these four. PNG8 is our primary 
+							recommendation for most site graphics.
+						</p>	
+						<p>
+							For further optimization all of these formats, <a href="http://www.smushit.com/ysmush.it/" target="_blank" title="Smush.It">Yahoo's Smush.It</a> can output
+							losslessly compressed versions of your uploaded images.
+						</p>			
+					</li>
+					<li>					
+						<h2 id="CSS-sprites">Leverage CSS Sprites</h2>
+						<p>
+							Traditionally, each image on a web page necessitates a request to the server, and each request comes with a certain amount of overhead.
+							One of our primary goals as interactive developers is to reduce the number of these HTTP requests, in order to improve page performance.
+						</p>
+						<p>
+							Borrowing from a technique used in some of the earliest video games, "sprites" are singular image files that are composed of many smaller 
+							image assets. The web page makes a single request for this image from the server, and each part of it is revealed using CSS 
+							<code>background-position</code>.
+						</p>
+						<p>
+							To read an overview of the general technique of spriting, visit 
+							<a href="http://css-tricks.com/css-sprites/" target="_blank" title="Information on CSS sprites">css-tricks.com</a>. One thing to keep in mind is that you 
+							should avoid making sprites too large (especially if there is a good deal of whitespace or transparent space between parts of the sprite), as images over 
+							1000 pixels in height or width can be a huge 
+							<a href="http://blog.vlad1.com/2009/06/22/to-sprite-or-not-to-sprite/" target="_blank" title="Information about sprites and memory">drain on system memory usage</a>.
+						</p>
+						
+						<p>
+							Properly using CSS sprites can be difficult and time consuming. If you aren't sure how to create an image sprite for your assets, or are
+							thinking about performing this optimization after your page is already developed, you may want to check out 
+							<a href="http://spriteme.org/" target="_blank" title="SpriteMe">SpriteMe</a>, a bookmarklet that can automatically generate both the sprite and the accompanying
+							CSS. As with any automated tool, careful review of the output is recommended.
+						</p>
+						<p>
+							For further details, read 
+							<a href="http://code.google.com/speed/page-speed/docs/rtt.html#SpriteImages" target="_blank" title="Spriting images">Google's documentation</a>
+							on minimizing round trips.						
+						</p>
+					</li>
+				</ul>
+			</section>
+
+		</div>	
+			
+		
+		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
+		<script src="js/syntax-highlighter.js"></script>	
+	</body> 
+</html>	

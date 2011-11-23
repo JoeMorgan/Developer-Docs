@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+	<head>
+		<link href="css/main.css" media="screen" rel="stylesheet" />
+<!--[if gte IE 6]>
+    <![if IE 7]>
+        <link href="css/ie7.css" media="screen" rel="stylesheet" />
+    <![endif]>
+    <![if IE 8]>
+        <link href="css/ie8.css" media="screen" rel="stylesheet" />
+    <![endif]>
+<![endif]-->		
+		<meta charset="utf-8" />	
+		<meta content="" name="keywords"/>
+		<meta content="" name="description"/>	
+		<title>Interactive Development Best Practices</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		
+		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
+		<script src="js/head.min.js"></script>
+		<script>
+			head.js(
+				{"WebFont": "http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"}, 		// Loading WebFont loader to minimize FOUT in Firefox (Google CDN)
+				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"},	// jQuery from the Google CDN
+				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
+				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
+			);
+			head.ready("WebFont", function() {
+				WebFont.load({
+					custom: {
+						families: ['SapientSansBoldRegular'],
+						urls: ['css/fonts/sapientSansBoldRegular.css']
+					}
+				});
+			});					
+		</script>			
+	</head>
+	
+	<body>
+		<div class="main-container">
+			<header>
+				<hgroup>
+					<h1>Interactive Development Best Practices</h1>
+					<h2>Joe Morgan | <time datetime="20011-03-15">March 15, 2011</time></h2>				
+				</hgroup>	
+				
+				<p>
+					Documenting best practices for interactive development is an exhaustive task, and is one that, if done effectively, would fill the pages of 
+					several books. The purpose of this guide is not to provide an all-encompassing list of best practices, but to highlight many of the most 
+					important components of a stable, high performance web page.
+				</p>
+
+			</header>
+			
+			
+			<nav>
+				<h1>Navigate This Document</h1>
+				<ul>
+					<li>
+						<a class="top-level" href="index.html" title="HTML">HTML</a>
+						<ul class="second-level">
+							<li><a href="#doctype" title="Doctype">Doctype</a></li>
+							<li>
+								<a href="#HTML5" title="HTML5">HTML5</a>
+								<ul>
+									<li><a href="#HTML5-shim" title="Making HTML5 Work">Making HTML5 Work</a></li>
+									<li><a href="#laymans-HTML5" title="The Layman's HTML5">The Layman's HTML5</a></li>
+								</ul>
+							</li>							
+							<li><a href="#XHTML-syntax" title="XHTML Syntax">XHTML Syntax</a></li>
+							<li><a href="#validation" title="HTML Validation">HTML Validation</a></li>
+							<li><a href="#deprecated" title="Avoid Deprecated Elements">Avoid Deprecated Elements</a></li>
+							<li>
+								<a href="#semantics" title="Semantics">Semantics</a>
+								<ul>
+									<li><a href="#document-outline" title="Document Outline">Document Outline</a></li>
+									<li><a href="#header-tags" title="Header Tags in HTML5 and XHTML">Header Tags in HTML5 and XHTML</a></li>
+									<li><a href="#tables-for-data" title="Use Tables for Tabular Data">Use Tables for Tabular Data</a></li>
+									<li><a href="#avoid-unnecessary-elements" title="Avoid Unnecessary Elements">Avoid Unnecessary Elements</a></li>
+								</ul>
+							</li>
+							<li><a href="#unnecessary-classes" title="Avoid Unnecessary Classes and IDs">Avoid Unnecessary Classes and IDs</a></li>
+							<li><a href="#image-tags" title="Image Tags">Image Tags</a></li>
+							<li><a href="#miscellaneous-guidelines" title="Miscellaneous Guidelines">Miscellaneous Guidelines</a></li>
+						</ul>
+					</li>
+					<li>
+						<a class="top-level" href="images.html" title="Images">Images</a>
+						<ul class="second-level">
+							<li><a href="#image-size" title="Image Size">Image Size</a></li>
+							<li><a href="#image-format" title="Image Formats">Image Formats</a></li>
+							<li><a href="#CSS-sprites" title="Leverage CSS Sprites">Leverage CSS Sprites</a></li>
+						</ul>					
+					</li>
+					<li class="active">
+						<a class="top-level" href="#css" title="CSS">CSS</a>
+						<ul class="second-level">
+							<li><a href="#inline-styles" title="Inline Styles">Inline Styles</a></li>
+							<li><a href="#external-css" title="Place All CSS Within the &lt;head&gt;">Place All CSS Within the <code>&lt;head&gt;</code></a></li>
+							<li><a href="#combine-stylesheets" title="Combine CSS Files">Combine CSS Files</a></li>
+							<li><a href="#link-vs-import" title="Use &lt;link&gt; to Include CSS, Not @import">Use <code>&lt;link&gt;</code> to Include CSS, Not <code>@import</code></a></li>
+							<li><a href="#reset" title="Use a CSS Reset">Use a CSS Reset</a></li>
+							<li><a href="#font-sizes" title="Specifying Font Sizes">Specifying Font Sizes</a></li>
+							<li><a href="#writing-good-selectors" title="Writing Good Selectors">Writing Good Selectors</a></li>
+							<li><a href="#shorthand" title="Shorthand">Shorthand</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="javascript.html" title="JavaScript">JavaScript</a>
+						<ul class="second-level">
+							<li><a href="#use-external-js" title="Restrict JavaScript to External Files">Restrict JavaScript to External Files</a></li>
+							<li>
+								<a href="#place-external-js" title="Placement of External JavaScript Files">Placement of External JavaScript Files</a>
+								<ul>
+									<li><a href="#end-of-page" title="Include JavaScript near the end of the page">Include JavaScript near the end of the page</a></li>
+									<li><a href="#js-loader" title="Use a JavaScript loader">Use a JavaScript loader</a></li>
+								</ul>
+							</li>	
+							<li><a href="#use-jquery" title="Use jQuery">Use jQuery</a></li>
+							<li><a href="#organize-code" title="Organize Your Code">Organize Your Code</a></li>
+							<li><a href="#general-js" title="General Coding Practices">General Coding Practices</a></li>
+						</ul>					
+					</li>
+				</ul>
+			</nav>
+			
+			
+			<section id="css">
+				<h1>CSS</h1>
+				
+				<ul class="recs">
+					<li>
+						<h2 id="inline-styles">Never Use Inline Styles</h2>
+						<p>
+							It may  be tempting to declare styles for an element within a style attribute. For example:
+						</p>
+						
+						<figure>
+							<figcaption class="code-label">Inline styling</figcaption>		
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									<p style="color:red; font-size:1.4em;">Wrong way to style</p> 				]]>
+							</script>
+						</figure>
+						
+						<p>
+							Declaring styles for an element this way usually leads to maintenance issues, as you would now have to keep track of styles declared 
+							both in the HTML itself as well as in an external stylesheet. 
+						</p>
+						
+						<p>
+							The style declared in the HTML tag attribute also loses out on context. When looking at styles within a (well organized) CSS document, 
+							you can see all other styles that may be applied to the element, including those that may be applied to its parent or other ancestors 
+							(this "cascade" is the C in CSS).
+						</p>
+						
+						<p>
+							Finally, inline styles will override externally defined styles, even those intentionally given a high cascade weight. This can make 
+							debugging difficult when a developer is expecting external styles to be applied.
+						</p>
+						
+						<p>
+							For reasons similar to these, it is usually best to avoid using <code>&lt;style&gt;</code> elements as well, though there may occasionally
+							be an exception to the rule in this case.
+						</p>
+					</li>
+					<li>					
+						<h2 id="external-css">Place All CSS Within the <code>&lt;head&gt;</code></h2>
+						
+						<p>
+							Technically speaking, links to external stylesheets and <code>&lt;style&gt;</code> elements may be placed almost anywhere within an HTML page. 
+							However, it is considered to be a best practice to put all styles within the <code>&lt;head&gt;</code> of a page to improve the perceived loading 
+							time of the page.
+						</p>
+						<p>
+							When styles are included within the <code>&lt;body&gt;</code> element, they may be applied after elements have already rendered on the page. 
+							This can cause “jumpy” effects as styles are retroactively applied to the rendered elements. 
+						</p>
+						<p>
+							The actual loading time of the page (as opposed to the perceived loading time) can be affected as well, as application of certain styles causes 
+							the browser to repeat certain page loading actions (such as determining element layout and “painting” the rendered page). 
+						</p>
+					</li>
+					<li>
+						<h2 id="combine-stylesheets">Combine CSS Files</h2>
+						<p>
+							Browsers can only request a limited number of files from the server concurrently. This leads to a staggered download profile, and the loading 
+							time of a page will increase dramatically along with the number of assets that need to be requested from the server.
+						</p>
+						<p>
+							One way to avoid excess server round-trip time is to combine assets into fewer files. For this reason, if a given set of styles is going 
+							to be used across a site, it almost always makes the most sense to combine all of these styles into a single stylesheet.  
+						</p>
+						<p>
+							For further details, read 
+							<a href="http://code.google.com/speed/page-speed/docs/rtt.html#CombineExternalCSS" target="_blank" title="Combine CSS files">Google's documentation</a>
+							on minimizing round trips.
+						</p>
+					</li>
+					<li>					
+						<h2 id="link-vs-import">Use <code>&lt;link&gt;</code> to Include CSS, Not <code>@import</code></h2>			
+						<p>
+							There are two ways to include a stylesheet in your web page. You can use the <code>&lt;link&gt;</code> tag:
+						</p>
+							
+	
+						<figure>
+							<figcaption class="code-label">The <code>&lt;link&gt;</code> method</figcaption>		
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									<link rel='stylesheet' href='css/main.css'>		]]>
+							</script>
+						</figure>
+													
+						<p>
+							Or you can use the <code>@import</code> rule:
+						</p>
+	
+						<figure>
+							<figcaption class="code-label">The @import method</figcaption>		
+							<script type="syntaxhighlighter" class="brush: css">
+								<![CDATA[
+									<style>
+										@import url('a.css');
+									</style>							]]>
+							</script>
+						</figure>					
+						<p>
+							Steve Souders, author of 
+							<em><a href="http://www.amazon.com/dp/0596529309?tag=stevsoud-20&amp;camp=14573&amp;creative=327641&amp;linkCode=as1&amp;creativeASIN=0596529309&amp;adid=1S1KP4EV129EN37422C0&amp;" target="_blank" title="High Performance Web Sites">High Performance Web Sites</a></em>,			
+							recommends the use of the <code>&lt;link&gt;</code> element over the <code>@import</code> rule for performance reasons, among other things. 
+							You can find his blog article on the subject 
+							<a href="http://www.stevesouders.com/blog/2009/04/09/dont-use-import/" target="_blank" title="Steve Souders discusses the @import rule">here</a>. 
+						</p>			
+					</li>	
+					<li>
+						<h2 id="reset">Use a CSS Reset</h2>
+						<p>
+							Unfortunately for interactive developers, the baseline styles applied to HTML elements differ widely from browser to 
+							browser. It is a long standing practice to include a CSS reset within the global stylesheet for a website. This is the best way to
+							ensure a consistent result from browser to browser. There are many such resets, but one good one that has been adapted for the use 
+							of HTML5 elements 
+							<a href="http://html5doctor.com/html-5-reset-stylesheet/" target="_blank" title="An example of a CSS reset">can be found here</a>
+						</p>
+					</li>
+					<li>
+						<h2 id="font-sizes">Specifying Font Sizes</h2>
+						<p>
+							Font sizes can be specified in several ways: pixels, percentages, ems, and points. The choice as to which should be used largely depends
+							on what browsers you are obligated to support for your project. Modern browsers provide either text resizing of pixel units and/or full-page zooming, 
+							but Internet Explorer 6 relies on relative font sizing (like ems or percentages) for this functionality. A good rule of thumb is to use 
+							pixels (which offer the most absolute control of font sizes) if you are not obligated to support IE6.
+						</p>
+						<p>
+							If IE6 must be supported, it helpful to recognize that, by default, body text size is set to 16 pixels across all major browsers 
+							(one thing they managed to do the same, thankfully). Since calculating em values based on the number 16 is tiresome, a good practice 
+							is to set the font size of the body element to 0.625em. This converts the baseline font size to 10 pixels, and other font sizes can 
+							be given as a multiplier of 10 (which is easy to handle mentally). 
+						</p>
+						<p>
+							For instance, if a design calls for paragraph text to be 12 pixels in size and <code>&lt;h1&gt;</code> text to be 18 pixels, you would specify 
+							the following styles:
+						</p>
+						<figure>
+							<figcaption class="code-label">Example of using ems to support text resizing in IE6</figcaption>		
+							<script type="syntaxhighlighter" class="brush: css">
+								<![CDATA[
+										body{
+											font-size:0.625em;			/* equivalent to 10px */
+										}
+										p{ 
+											font-size:1.2em; 			/* equivalent to 12px */
+											line-height:1.25em;			/* relative to the p font size, so 15px */
+										}
+										h1{ 
+											font-size:1.8em; 			/* equivalent to 18px */
+										}							]]>
+							</script>
+						</figure>	
+					</li>
+					<li>
+						<h2 id="writing-good-selectors">Writing Good Selectors</h2>
+						
+						<p>
+							Writing good CSS selectors is important for maintainability and performance. To understand why, you have to first realize 
+							two things:	<strong>browsers parse CSS selectors from right to left</strong>, and different selector types have different
+							relative weights (this latter part is called <strong>CSS specificity</strong>). 
+						</p>
+						<p>
+							Let's use the following set of selectors as a reference to illustrate these concepts:
+						</p>
+						<figure>
+							<figcaption class="code-label">CSS selector examples</figcaption>		
+							<script type="syntaxhighlighter" class="brush: css">
+								<![CDATA[
+										.highlight{					
+											color:blue;
+										}
+										span.highlight{
+											color:red;
+										}
+										#note-section .highlight{
+											color:yellow;
+										}
+										div.footer .highlight{
+											color:green;
+										}
+							</script>
+						</figure>	
+						<p>
+							If we were to assume that browsers parsed as we read, from left to right, then we would think that each of these selectors
+							is more efficient than the last. The opposite is true. It is faster for a browser to find all elements with the <code>highlight</code> 
+							class than it is to first find those elements, then verify that each of those elements meets the additional selector 
+							requirements (such as being a <code>&lt;span&gt;</code>, or having a <code>&lt;div&gt;</code> as an ancestor).
+						</p>
+						<p>
+							Of course we can't always use the simplest selectors. We may want our highlights to be blue in general, but yellow within the
+							note section of our page and green within the footer. This is where being more specific helps, but there's a problem with our 
+							example set above: ID selectors are infinitely more powerful than class selectors, so the footer highlight will end up being yellow,
+							not green.
+						</p>
+						<p>	
+							The only way to trump the ID selector would be to add an <em>another</em> ancestor element with an ID selector into the selection
+							chain, or to use the <code>!important</code> designator. You can probably see how this can escalate into a selector arms race, 
+							with each overriding selector getting longer and longer (not to mention slower and slower!). 
+						</p>
+							
+						<p>
+							To avoid these issues, here are some specific guidelines to follow:
+						</p>				
+						<ul>
+							<li>
+								<p>
+									Use the simplest selector necessary to reach your target elements and override any pre-existing styles
+								</p>
+							</li>
+							<li>
+								<p>
+									Avoid ID selectors unless you're certain that the style will never be overridden
+								</p>
+							</li>
+							<li>
+								<p>
+									Never use the <code>!important</code> designator
+								</p>
+							</li>
+							<li>
+								<p>
+									Avoid the wildcard selector (<code>*</code>)
+								</p>
+							</li>
+							<li>
+								<p>
+									Don't qualify ID selectors (e.g. <code>div#myid</code>) or class selectors (e.g. <code>table.results</code>) unless its 
+									necessary for readability or for efficiency
+								</p>
+							</li>
+						</ul>					
+	
+						<p>
+							For further reading, check out these articles on  
+							<a href="http://code.google.com/speed/page-speed/docs/rendering.html#UseEfficientCSSSelectors" target="_blank" title="Selector efficiency">selector efficiency</a>,
+							<a href="http://css-tricks.com/specifics-on-css-specificity/" target="_blank" title="CSS specificity">CSS specificity</a>, and
+							<a href="http://www.quirksmode.org/css/contents.html" target="_blank" title="Browsers support for CSS selectors">browser support for CSS selectors</a>
+						</p>
+					</li>	
+					<li>
+						<h2 id="shorthand">Shorthand</h2>
+						<p>
+							In general, CSS shorthand is preferred because of its terseness, and the ability to later go back and add in values that are 
+							already present, such as the case with margin and padding. Developers should be aware of the TRBL acronym, denoting the order 
+							in which the sides of an element are defined, in a clock-wise manner: Top, Right, Bottom, Left. If bottom is undefined, it 
+							inherits its value from top. Likewise, if left is undefined, it inherits its value from right. If only the top value is defined, 
+							all sides inherit from that one declaration.
+						</p>
+						<p>
+							For more on reducing stylesheet code redundancy, and using CSS shorthand in general:
+						</p>
+						<ul>
+							<li>
+								<p>
+									<a href="http://sonspring.com/journal/css-redundancy" target="_blank" title="CSS redundancy">http://sonspring.com/journal/css-redundancy</a>
+								</p>
+							</li>
+							<li>
+								<p>
+									<a href="http://qrayg.com/journal/news/css-background-shorthand" target="_blank" title="Background shorthand">http://qrayg.com/journal/news/css-background-shorthand</a>
+								</p>
+							</li>
+							<li>
+								<p>
+									<a href="http://dustindiaz.com/css-shorthand" target="_blank" title="CSS shorthand">http://dustindiaz.com/css-shorthand</a>
+								</p>
+							</li>
+						</ul>
+					</li>		
+				</ul>
+			</section>
+
+		</div>	
+			
+		
+		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
+		<script src="js/syntax-highlighter.js"></script>	
+	</body> 
+</html>	

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+	<head>
+		<link href="css/main.css" media="screen" rel="stylesheet" />
+<!--[if gte IE 6]>
+    <![if IE 7]>
+        <link href="css/ie7.css" media="screen" rel="stylesheet" />
+    <![endif]>
+    <![if IE 8]>
+        <link href="css/ie8.css" media="screen" rel="stylesheet" />
+    <![endif]>
+<![endif]-->		
+		<meta charset="utf-8" />	
+		<meta content="" name="keywords"/>
+		<meta content="" name="description"/>	
+		<title>Interactive Development Best Practices</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		
+		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
+		<script src="js/head.min.js"></script>
+		<script>
+			head.js(
+				{"WebFont": "http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"}, 		// Loading WebFont loader to minimize FOUT in Firefox (Google CDN)
+				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"},	// jQuery from the Google CDN
+				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
+				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
+			);
+			head.ready("WebFont", function() {
+				WebFont.load({
+					custom: {
+						families: ['SapientSansBoldRegular'],
+						urls: ['css/fonts/sapientSansBoldRegular.css']
+					}
+				});
+			});					
+		</script>			
+	</head>
+	
+	<body>
+		<div class="main-container">
+			<header>
+				<hgroup>
+					<h1>Interactive Development Best Practices</h1>
+					<h2>Joe Morgan | <time datetime="20011-03-15">March 15, 2011</time></h2>				
+				</hgroup>	
+				
+				<p>
+					Documenting best practices for interactive development is an exhaustive task, and is one that, if done effectively, would fill the pages of 
+					several books. The purpose of this guide is not to provide an all-encompassing list of best practices, but to highlight many of the most 
+					important components of a stable, high performance web page.
+				</p>
+
+			</header>
+			
+			
+			<nav>
+				<h1>Navigate This Document</h1>
+				<ul>
+					<li class="active">
+						<a class="top-level" href="#HTML" title="HTML">HTML</a>
+						<ul class="second-level">
+							<li><a href="#doctype" title="Doctype">Doctype</a></li>
+							<li>
+								<a href="#HTML5" title="HTML5">HTML5</a>
+								<ul>
+									<li><a href="#HTML5-shim" title="Making HTML5 Work">Making HTML5 Work</a></li>
+									<li><a href="#laymans-HTML5" title="The Layman's HTML5">The Layman's HTML5</a></li>
+								</ul>
+							</li>							
+							<li><a href="#XHTML-syntax" title="XHTML Syntax">XHTML Syntax</a></li>
+							<li><a href="#validation" title="HTML Validation">HTML Validation</a></li>
+							<li><a href="#deprecated" title="Avoid Deprecated Elements">Avoid Deprecated Elements</a></li>
+							<li>
+								<a href="#semantics" title="Semantics">Semantics</a>
+								<ul>
+									<li><a href="#document-outline" title="Document Outline">Document Outline</a></li>
+									<li><a href="#header-tags" title="Header Tags in HTML5 and XHTML">Header Tags in HTML5 and XHTML</a></li>
+									<li><a href="#tables-for-data" title="Use Tables for Tabular Data">Use Tables for Tabular Data</a></li>
+									<li><a href="#avoid-unnecessary-elements" title="Avoid Unnecessary Elements">Avoid Unnecessary Elements</a></li>
+								</ul>
+							</li>
+							<li><a href="#unnecessary-classes" title="Avoid Unnecessary Classes and IDs">Avoid Unnecessary Classes and IDs</a></li>
+							<li><a href="#image-tags" title="Image Tags">Image Tags</a></li>
+							<li><a href="#miscellaneous-guidelines" title="Miscellaneous Guidelines">Miscellaneous Guidelines</a></li>
+						</ul>
+					</li>
+					<li>
+						<a class="top-level" href="images.html" title="Images">Images</a>
+						<ul class="second-level">
+							<li><a href="#image-size" title="Image Size">Image Size</a></li>
+							<li><a href="#image-format" title="Image Formats">Image Formats</a></li>
+							<li><a href="#CSS-sprites" title="Leverage CSS Sprites">Leverage CSS Sprites</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="css.html" title="CSS">CSS</a>
+						<ul class="second-level">
+							<li><a href="#inline-styles" title="Inline Styles">Inline Styles</a></li>
+							<li><a href="#external-css" title="Place All CSS Within the &lt;head&gt;">Place All CSS Within the <code>&lt;head&gt;</code></a></li>
+							<li><a href="#combine-stylesheets" title="Combine CSS Files">Combine CSS Files</a></li>
+							<li><a href="#link-vs-import" title="Use &lt;link&gt; to Include CSS, Not @import">Use <code>&lt;link&gt;</code> to Include CSS, Not <code>@import</code></a></li>
+							<li><a href="#reset" title="Use a CSS Reset">Use a CSS Reset</a></li>
+							<li><a href="#font-sizes" title="Specifying Font Sizes">Specifying Font Sizes</a></li>
+							<li><a href="#writing-good-selectors" title="Writing Good Selectors">Writing Good Selectors</a></li>
+							<li><a href="#shorthand" title="Shorthand">Shorthand</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="javascript.html" title="JavaScript">JavaScript</a>
+						<ul class="second-level">
+							<li><a href="#use-external-js" title="Restrict JavaScript to External Files">Restrict JavaScript to External Files</a></li>
+							<li>
+								<a href="#place-external-js" title="Placement of External JavaScript Files">Placement of External JavaScript Files</a>
+								<ul>
+									<li><a href="#end-of-page" title="Include JavaScript near the end of the page">Include JavaScript near the end of the page</a></li>
+									<li><a href="#js-loader" title="Use a JavaScript loader">Use a JavaScript loader</a></li>
+								</ul>
+							</li>	
+							<li><a href="#use-jquery" title="Use jQuery">Use jQuery</a></li>
+							<li><a href="#organize-code" title="Organize Your Code">Organize Your Code</a></li>
+							<li><a href="#general-js" title="General Coding Practices">General Coding Practices</a></li>
+						</ul>					
+					</li>
+				</ul>
+			</nav>
+			
+			
+			<section id="HTML">
+				<h1>HTML</h1>
+				<ul class="recs">
+					<li>				
+						<h2 id="doctype">Doctype</h2>
+						<p>
+							The doctype is how a browser makes sense of the HTML content of a page. Over the years doctypes have taken many forms, usually long and cumbersome:
+						</p>
+				
+						<figure>
+							<figcaption class="code-label">XHTML transitional doctype</figcaption>		
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+										"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	]]>
+							</script>
+						</figure>	
+											
+						<p>
+							Here are some points to remember about doctypes:
+						</p>
+						<ul>
+							<li>
+								The doctype must be the first thing that a browser reads; this means that it should usually be present on line 1 of an HTML document
+								<ul>
+									<li>
+										<p>
+											If this is not the case, older versions of IE will go into quirks mode, which can cause many different and hard to track issues
+										</p>
+									</li>
+									<li>
+										<p>
+											If a server-side language is rendering the page, code may show up above the doctype (as with a PHP page that does a server-side 
+											include at the top of the page), as long as this code does not render anything
+										</p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<p>
+									The doctype must be valid and well formed
+								</p>
+							</li>
+						</ul>
+						
+						<p>
+							<strong>These days, it is becoming a standard practice to use the HTML5 doctype, even if other HTML5 features aren't being used. It is simply:</strong>
+						</p>
+			
+						<figure>
+							<figcaption class="code-label">HTML5 doctype</figcaption>		
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									<!DOCTYPE html>		]]>
+							</script>
+						</figure>						
+						
+						<p>
+							This doctype is easy to remember and is recognized by all modern browsers (including Internet Explorer 6). It is flexible in the sense that 
+							both HTML and XHTML syntax is valid under this doctype, and it is also necessary to use this doctype for HTML5 features to work correctly.
+						</p>
+					</li>
+					<li>
+						<h2 id="HTML5">HTML5</h2>
+						<p>
+							HTML5 is <del>the new hotness</del> a new version of HTML and XHTML. The HTML5 draft specification defines a single language that can be written in HTML and XML. 
+							It attempts to solve issues found in previous iterations of HTML and addresses the needs of Web Applications, an area previously not adequately 
+							covered by HTML.
+						</p>
+						
+							<h3 id="HTML5-shim">Making HTML5 Work</h3>
+							<p>
+								The new semantic elements available in HTML5 are great, but there's one major issue to fix before you can use them: Internet Explorer (below version 9) won't let 
+								display unrecognized elements correctly. 
+							</p>
+							<p>	
+								Luckily, if you create an unknown element with JavaScript,	even without inserting it into the DOM, this problem
+								magically goes away. Many small JavaScript utilities exist that do this, among many other things. 
+								<a href="http://www.modernizr.com/" target="_blank" title="Modernizr">Modernizr</a> and <a href="http://headjs.com/" target="_blank" title="Head JS script loader">Head JS</a> 
+								are some good examples.
+							</p>
+							<p>
+								Mark Pilgrim of Dive Into HTML5 goes into 
+								<a href="http://diveintohtml5.org/semantics.html#unknown-elements" target="_blank" title="Dive Into HTML5 on unknown elements">some detail about all of this here</a>.
+							</p>
+							
+							<h3 id="laymans-HTML5">The Layman's HTML5</h3>
+							<p>
+								When non-developers talk about HTML5, they are usually referring to HTML5 along with a whole boatload of related specifications that make
+								up the "modern web" movement. A comprehensive list of these technologies (along with some slightly dated information about which browsers support
+								them) 
+								<a href="http://www.findmebyip.com/litmus/" target="_blank" title="List of HTML5 technologies">can be found here</a>. 
+							</p>
+							<p>
+								While we encourage the adoption of new technologies, the recommendation is to do what makes sense for your project. If your team wants to explore
+								the possibility of leveraging the <code>&lt;canvas&gt;</code> element (for example) to do some cool animations and interactions, that's great. Just make sure
+								of the following:
+							</p>
+							<dl>
+								<dt>Capability</dt>
+								<dd>
+									<p>
+										Don't agree to something that is totally beyond your skill set; creating a quick proof of concept to ensure that the solution is feasible can help
+										keep you from getting in over your head
+									</p>
+								</dd>
+								
+								<dt>Flexibility of the experience</dt>
+								<dd>
+									<p>
+										Most clients require us to support browsers that don't yet handle HTML5 technologies; make sure that everyone knows that there will be a 
+										baseline experience for these browsers, with additional functionality for those browsers that can handle it
+									</p>
+								</dd>
+								
+								<dt>Collaboration</dt>
+								<dd>
+									<p>
+										Having different experiences for different browsers requires increased collaboration between the development team and the design team; make 
+										the design team aware of this fact
+									</p>
+								</dd>
+								
+								<dt>Budget and Deadlines</dt>
+								<dd>
+									<p>
+										Increased technical complexity, multiple versions of one experience, and increased back-and-forth with designers all take time; make sure that
+										all of this is baked into your level of effort estimates
+									</p>
+								</dd>
+							</dl>
+					</li>	
+					<li>	
+						<h2 id="XHTML-syntax">XHTML Syntax</h2>
+						<p>
+							Generally speaking, it is a good idea for your markup to conform to the XHTML syntax rules. This is obviously necessary when using an XHTML 
+							doctype (syntax errors will cause your page to fail validation, and can cause rendering issues). It is wise to use the XHTML syntax even when 
+							using the HTML5 doctype mentioned above, for a number of reasons. Markup conforming to XHTML syntax rules is:
+						</p>
+						<ul>
+							<li>
+								<p>
+									highly readable
+								</p>
+							</li>
+							<li>
+								<p>
+									flexible and stable&ndash;HTML5 allows XHTML syntax, but XHTML does not allow HTML syntax; this means that the doctype can be changed between 
+									the two types without worry of causing syntax-related issues
+								</p>
+							</li>
+							<li>
+								<p>
+									familiar&ndash;both to interactive developers and to back-end developers who are used to working with XML
+								</p>
+							</li>
+						</ul>
+						
+						<p>
+							So what are these rules?
+						</p>
+						
+						<ul>
+							<li>
+								<p>
+									Make all your tags lower case (<code>&lt;p&gt;</code> instead of <code>&lt;/P&gt;</code>)
+								</p>
+							</li>
+							<li>
+								<p>
+									Close all your tags, even empty ones (<code>&lt;br /&gt;</code> and <code>&lt;hr /&gt;</code> instead of <code>&lt;br&gt;</code> and <code>&lt;hr&gt;</code>)
+								</p>
+							</li>
+							<li>
+								<p>
+									Make all attribute names lower case and quote all attribute values; for example, <code>&lt;td colspan="2"&gt;</code> instead of <code>&lt;TD COLSPAN=2&gt;</code> 
+								</p>
+							</li>
+							<li>
+								<p>
+									Give empty attributes a value, such as <code>&lt;input type="checkbox" checked="checked" /&gt;</code> instead of <code>&lt;INPUT TYPE=checkbox CHECKED&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									Nest all your tags correctly
+								</p>
+							</li>
+						</ul>
+					</li>
+	
+					<li>					
+						<h2 id="validation">HTML Validation</h2>
+						<p>
+							Validating the correctness of your HTML markup can be one of the easiest ways of finding otherwise difficult to explain issues. Validation can identify
+							errors that, if left uncorrected, can have negative impacts on page performance, accessibility, and search engine optimization. The W3C validator can 
+							be found <a href="http://validator.w3.org/" target="_blank" title="W3C Validator">here</a>.
+						</p>
+					</li>
+					<li>					
+						<h2 id="deprecated">Avoid Deprecated Elements</h2>
+						
+						<p>
+							This is related to the note on validation, above, as including deprecated elements in your markup can potentially cause validation errors.
+						</p>
+						<p>
+							Many elements are no longer part of the HTML specification and should be avoided (this text is taken directly from the specification).
+						</p>
+						
+						<p>
+							The following elements are not in HTML5 because their effect is purely presentational and their function is better handled by CSS:
+						</p>			
+						<ul>
+							<li>
+								<p>
+									<code>&lt;font&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;basefont&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;big&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;center&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;strike&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;tt&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;u&gt;</code>
+								</p>
+							</li>
+						</ul>
+						
+						<p>
+							The following elements are not in HTML5 because using them damages usability and accessibility:
+						</p>			
+						<ul>
+							<li>
+								<p>
+									<code>&lt;frame&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;frameset&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;noframes&gt;</code>
+								</p>
+							</li>
+						</ul>
+						
+						<p>
+							The following elements are not included because they have not been used often, created confusion, or their function can be handled by 
+							other elements:
+						</p>			
+						<ul>
+							<li>
+								<p>
+									<code>&lt;acronym&gt;</code> is not included because it has created a lot of confusion. Authors are to use <code>abbr</code> for abbreviations
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;applet&gt;</code> has been made obsolete in favor of <code>&lt;object&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;isindex&gt;</code> usage can be replaced by usage of form controls
+								</p>
+							</li>
+							<li>
+								<p>
+									<code>&lt;dir&gt;</code> has been made obsolete in favor of <code>&lt;ul&gt;</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									Finally the <code>&lt;noscript&gt;</code> element is only conforming in the HTML syntax. It is not included in the XML syntax 
+									as its usage relies on an HTML parser (so don't include it if you're using an XHTML doctype)
+								</p>
+							</li>
+						</ul>
+					</li>
+					<li>					
+						<h2 id="semantics">Semantics</h2>	
+						
+							<h3 id="document-outline">Document Outline</h3>
+							
+							<p>
+								It is important that your HTML document be well organized and contain elements that follow a formal structure. This makes it readable 
+								both to humans who aren’t necessarily seeing the visual experience of the page (such as a blind user who is using a screen reader), 
+								and to the machines that read every page on the internet (like the bots employed by Google to determine search results).
+							</p>
+								
+								<h4 id="header-tags">Header Tags in HTML5 and XHTML</h4>
+								
+								<p>
+									Regardless of what doctype is being used, one of the best ways to make sure that your document has a correct outline is to use header tags correctly.
+								</p>
+								
+								<p>
+									The <code>&lt;h1&gt;</code> tag is the most important of the semantic tags, and its contents are weighted heavily by search bots when 
+									determining page relevance. 
+								</p>
+								
+								<p>
+									In XHTML, there can be only one <code>&lt;h1&gt;</code> tag on the page (often the company name/logo, or the title of an article for blogs). 
+									Subsections are each headed by <code>&lt;h2&gt;</code> elements and may be subdivided further by using headings of the subsequent level 
+									(all the way to <code>&lt;h6&gt;</code>). Heading levels should not be skipped.
+								</p>
+								
+								<p>
+									When using an HTML5 document structure, you can check the outline of your document by using something like 
+									<a href="http://code.google.com/p/h5o/downloads/detail?name=outliner.0.5.0.62.html&amp;can=2&amp;q=" target="_blank" title="HTML5 Outliner Bookmarklet">this HTML5 outliner bookmarklet</a>.
+									To use it, simply download the page and open it, then bookmark the link shown. When you click the bookmark, the outline of the page
+									you are visiting will be shown.
+								</p>
+								
+								<p>
+									HTML5 introduces the concept of “sections” in documents, and each section can have an <code>&lt;h1&gt;</code> element, followed by the rest of the headers. 
+									For a fantastic explanation of semantics in HTML5, and the header elements in particular, see 
+									<a href="http://diveintohtml5.org/semantics.html#header-element" target="_blank" title="Header element discussed">this article by Mark Pilgrim</a> over at 
+									<a href="http://diveintohtml5.org" target="_blank" title="diveintohtml5.org">diveintohtml5.org</a>.
+								</p>
+							
+							<h3 id="tables-for-data">Use Tables for Tabular Data (Only)</h3>
+							
+							<p>
+								For years, HTML tables have been used to visually lay out elements on a page. At first, this was necessary, as there was no other way of creating 
+								many common page layouts. The practice continued even after CSS made table-less layout possible because developers were used to using tables and knew 
+								how to do it, and it can be quite difficult to get the hang of using CSS for complex layouts.
+							</p>
+								
+							<p>
+								Nowadays, there are no layouts that can’t be built by using CSS. Unless you need to display tabular data in rows and columns, tables should not be 
+								used. This is for a number of reasons:
+							</p>	
+									
+							<ul>
+								<li>
+									<p>
+										Tables are not good for accessibility; screen readers have a hard time wading through numerous tables, table bodies, table rows, and table cells. 
+										Imagine listening to a screen reader saying “table cell” over and over again when you’re just trying to read the content of a page
+									</p>
+								</li>
+								<li>
+									<p>
+										All of the aforementioned elements can take a toll on a webpage; Excess markup can hurt a page’s search engine optimization (which is best 
+										expressed as relevant content vs. page weight), JavaScript performance, page download time, and page render time
+									</p>
+								</li>
+								<li>
+									<p>
+										Tables negatively impact page render time beyond simply adding markup to be parsed; because table width is dictated by a sum of column widths, 
+										and column widths can be influenced by the width of all contained elements, tables must go through multiple render cycles before the browser can 
+										move on to the rest of the document
+									</p>
+								</li>
+							</ul>		
+									
+							<h3 id="avoid-unnecessary-elements">Avoid Unnecessary Elements</h3>		
+									
+							<p>
+								<code>&lt;div&gt;</code> tags are useful block level elements for organizing sections of code (especially when something like a <code>&lt;section&gt;</code>
+								or <code>&lt;article&gt;</code> wouldn't really make sense), but too often developers moving away from table-based layout think that divs do something more 
+								than that&ndash;they don’t. 
+							</p>		
+								
+							<p>
+								If your markup has divs within divs within divs, take a step back and ask yourself what you’re really trying to accomplish with these elements. There may
+								be a more semantically appropriate way to meet your needs.
+							</p>		
+							<p>
+								Back in 20009, Smashing Magazine (which is a great resource for all aspects of web design and development) 
+								<a href="http://www.smashingmagazine.com/2009/04/08/from-table-hell-to-div-hell/" target="_blank" title="Smashing Magazine">posted an article</a> 
+								that dives deeply into the topic of "divitis".
+							</p>
+							
+							<p>
+								More generally speaking, keeping the number of elements on a page to a minimum is a good practice for optimizing the page’s performance. 
+								Read about this in <a href="http://developer.yahoo.com/performance/rules.html#min_dom" target="_blank" title="Yahoo! developer docs">Yahoo!'s developer documentation</a>. 
+							</p>
+					</li>
+					<li>					
+						<h2 id="unnecessary-classes">Avoid Unnecessary Classes and IDs</h2>
+						
+						<p>
+							Some developers will give an ID or a class (or worse, both) to every element in the HTML. This can not only make the source of the page difficult 
+							to read, but all of those extra characters that need to be downloaded by the browser add up, and result in slightly slower page loading times.
+						</p>
+						
+						<p>
+							As a best practice, wait to assign a class or ID to an element until you know that you need it. This isn't to say not to use them at all, of course. 
+							The CSS parser has an easier time applying rules to a class-based ancestral selector than one that just uses a generic tag name, so don't be stingy 
+							with classes when it makes sense to use them. 
+						</p>
+					</li>
+					<li>					
+						<h2 id="image-tags">Image Tags</h2>
+						<p>
+							When using image tags, always specify <code>alt</code>, <code>height</code>, and <code>width</code> values. <code>alt</code> is required for accessibility, 
+							and specifying <code>height</code> and <code>width</code> attributes improves page performance. 
+						</p>
+						<p>
+							The reason for the latter is that a browser, when it encounters an <code>&lt;image&gt;</code> tag, will initiate the download of the image, and then 
+							move on to the next element in the HTML page. If the <code>height</code> and <code>width</code> attributes were specified in the HTML, the browser 
+							knows what size placeholder to put in for the image as it is downloading and doesn’t have to look back.
+						</p>
+						
+						<p>
+							If <code>height</code> and <code>width</code> are not specified in the markup, the browser has to wait until the image finishes downloading, then go 
+							back to check its dimensions, and adjust the layout of the entire page accordingly (this causes what are known as reflow and repaint cycles, which 
+							are costly in terms of page performance).
+						</p>
+						<p>
+							Lastly, never use spacer images. If you know what spacer images are, then you should enough by now not to use them.
+						</p>
+					</li>
+					<li>					
+						<h2 id="miscellaneous-guidelines">Miscellaneous Guidelines</h2>
+						<ul>
+							<li>
+								<p>
+									All markup should be delivered as UTF-8, as its the most friendly for internationalization. It should be designated in both the HTTP header 
+									and the head of the document. 
+								</p>
+								
+								<figure>
+									<figcaption class="code-label">Setting the character set using a <code>&lt;meta&gt;</code> tag</figcaption>		
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+											<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		]]>
+									</script>
+								</figure>	
+								
+								<figure>
+									<figcaption class="code-label">In HTML5, this became simpler</figcaption>		
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+											<meta charset="utf-8">		]]>
+									</script>
+								</figure>								
+							</li>
+							<li>
+								<p>
+									Make use of <code>&lt;dl&gt;</code> (description list) and <code>&lt;blockquote&gt;</code> elements, when appropriate. 
+								</p>
+							</li>
+							<li>
+								<p>
+									Items in list form should always be contained within a <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, or <code>&lt;dl&gt;</code>, never a 
+									set of <code>&lt;div&gt;</code> or <code>&lt;p&gt;</code> elements.
+								</p>
+							</li>
+							<li>
+								<p>
+									Use <code>&lt;label&gt;</code> elements to label each form field. The <code>for</code> attribute of the <code>&lt;label&gt;</code> should match 
+									the ID of the associated input field, so that users can click on labels to bring focus to text inputs, toggle checkboxes, etc; You should also 
+									set the <code>cursor</code> CSS property of the label to "<code>pointer</code>", to give a visual cue that this interaction is possible
+								</p>
+							</li>
+							<li>
+								<p>
+									Do not use the size attribute on input fields. The size attribute is relative to the font-size of the text inside the input; Instead use the CSS 
+									<code>width</code> property; It is often best to use CSS <code>width</code> and <code>height</code> for <code>&lt;textarea&gt;</code> elements, as well,
+									since it can be difficult to match the dimensions of the design while using the <code>cols</code> and <code>rows</code> attributes
+								</p>
+							</li>
+							<li>
+								<p>
+									Place an html comment on some closing <code>&lt;div&gt;</code> tags to indicate which element you're closing. This helps with readability when
+									there are a lot of nested elements
+								</p>
+	
+								<figure>
+									<figcaption class="code-label">Example of commented closing tags</figcaption>		
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+												...
+												<ul>
+													<li><a href="/terms.html">Terms &amp; Conditions</a></li>
+													<li><a href="/privacy.html">Privacy Policy</a></li>
+													<li><a href="/contact.html">Contact Us</a></li>
+												</ul>
+											</div>	<!-- class="content-module footer-module" -->
+										</div>	<!-- id="footer" -->													]]>
+									</script>
+								</figure>								
+							</li>
+							<li>
+								<p>
+									Use <a href="http://en.wikipedia.org/wiki/Microformat" target="_blank" title="Microformats">microformats</a> where appropriate, specifically <code>hCard</code> 
+									and <code>adr</code>
+								</p>
+							</li>
+							<li>
+								<p>
+									Make use of <code>&lt;caption&gt;</code> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;th&gt;</code> elements (and the 
+									<code>scope</code> and <code>summary</code> attributes) when appropriate
+								</p>
+								
+								<figure>
+									<figcaption class="code-label">Example table markup</figcaption>		
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+										<table summary="Blenders available in store">
+											<caption>Blenders available in the store, by price and wattage</caption>
+											<thead>
+												<tr>
+													<th scope="col">Brand</th>
+													<th scope="col">Price</th>
+													<th scope="col">Wattage</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td scope="row">Vitamix</td>
+													<td>$399.95</td>
+													<td>1100</td>
+												</tr>
+												<tr>
+													<td scope="row">Cuisinart</td>
+													<td>$99.99</td>
+													<td>600</td>
+												</tr>
+												<tr>
+													<td scope="row">Black &amp; Decker</td>
+													<td>$39.95</td>
+													<td>400</td>
+												</tr>
+											</tbody>
+										</table>													]]>
+									</script>
+								</figure>								
+							</li>
+							<li>
+								<p>
+									Always use title-case for headers and titles. Do not use all caps or all lowercase titles in markup, instead apply the CSS property 
+									<code>text-transform:uppercase/lowercase</code>
+								</p>
+							</li>
+						</ul>
+					</li>
+				</ul>			
+			</section>
+
+		</div>	
+			
+		
+		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
+		<script src="js/syntax-highlighter.js"></script>	
+	</body> 
+</html>	
