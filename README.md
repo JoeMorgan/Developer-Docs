@@ -13,4 +13,4 @@ Originally compiled by [Joe Morgan][], from multiple sources on the subject of d
 [Joe Morgan]:https://github.com/JoeMorgan/
 [Isobar's]:http://na.isobar.com/
 [Front-end Code Standards & Best Practices]:http://na.isobar.com/standards/
-[issue]:issues/
+[issue]:Developer-Docs/issues/
