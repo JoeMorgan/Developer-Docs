@@ -67,19 +67,21 @@
 /* // END RESET */
 
 /* Font Replacement */
-	.wf-loading h1,
-	.wf-loading h2,
-	.wf-loading nav a{
-		text-transform:uppercase;
-		visibility: hidden;
+	@font-face {
+	    font-family: 'SapientSansBoldRegular';
+	    src: url('fonts/spntsb-webfont.eot');
+	    src: url('fonts/spntsb-webfont.eot?iefix') format('eot'),
+	         url('fonts/spntsb-webfont.woff') format('woff'),
+	         url('fonts/spntsb-webfont.ttf') format('truetype'),
+	         url('fonts/spntsb-webfont.svg#webfontIEvjje2r') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
 	}
-	.wf-active h1, 
-	.wf-inactive h1,
-	.wf-active h2, 
-	.wf-inactive h2,
-	.wf-active nav a, 
-	.wf-inactive nav a{
+	h1, 
+	h2, 
+	nav a{ 
 		font-family: "SapientSansBoldRegular", Verdana, Arial, Helvetica, sans-serif;
+		text-transform:uppercase;
 		visibility: visible;
 	}
 /* END Font Replacement */
@@ -89,9 +91,9 @@
 		font-weight:bold;
 		text-decoration:none;
 		
-		-moz-transition:color .4s ease-in-out;
-		-webkit-transition: color .4s ease-in-out;
-		transition: color .4s ease-in-out;
+		-moz-transition:color .3s ease-in-out;
+		-webkit-transition: color .3s ease-in-out;
+		transition: color .3s ease-in-out;
 	}
 	a:hover{
 		color:#000;
