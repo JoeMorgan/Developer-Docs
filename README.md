@@ -4,14 +4,16 @@ The goal in hosting these docs ([rendered][]) on Github is to allow for their ev
 
 ## Credits ##
 
-Originally compiled by [Joe Morgan][], from multiple sources on the subject of development standards, including:
+Contributions by [Ryan Fitzer][]
+
+Originally compiled from multiple sources on the subject of development standards, including:
 
 * [Isobar's][] [Front-end Code Standards & Best Practices][]
 
 ***Note**: please open an [issue][] if you find an uncredited source.*
 
 [rendered]:http://ryanfitzer.github.com/Developer-Docs/
-[Joe Morgan]:https://github.com/JoeMorgan/
+[Ryan Fitzer]:https://github.com/ryanfitzer/
 [Isobar's]:http://na.isobar.com/
 [Front-end Code Standards & Best Practices]:http://na.isobar.com/standards/
 [issue]:Developer-Docs/issues/
