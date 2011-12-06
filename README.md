@@ -12,7 +12,7 @@ Originally compiled from multiple sources on the subject of development standard
 
 ***Note**: please open an [issue][] if you find an uncredited source.*
 
-[rendered]:http://ryanfitzer.github.com/Developer-Docs/
+[rendered]:http://joemorgan.github.com/Developer-Docs/
 [Ryan Fitzer]:https://github.com/ryanfitzer/
 [Isobar's]:http://na.isobar.com/
 [Front-end Code Standards & Best Practices]:http://na.isobar.com/standards/
