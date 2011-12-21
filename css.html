@@ -23,19 +23,10 @@
 		<script src="js/head.min.js"></script>
 		<script>
 			head.js(
-				{"WebFont": "http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"}, 		// Loading WebFont loader to minimize FOUT in Firefox (Google CDN)
-				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"},	// jQuery from the Google CDN
+				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"},	// jQuery from the Google CDN
 				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
 				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
-			);
-			head.ready("WebFont", function() {
-				WebFont.load({
-					custom: {
-						families: ['SapientSansBoldRegular'],
-						urls: ['css/fonts/sapientSansBoldRegular.css']
-					}
-				});
-			});					
+			);					
 		</script>			
 	</head>
 	

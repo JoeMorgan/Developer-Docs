@@ -33,9 +33,10 @@ head.ready("library", function() {
 			var theElem = findTarget(node),
 				elemOffset = theElem.offset(),
 				elemTopOffset = elemOffset.top - 20;	
-			
-			$("html").animate(
-				{scrollTop: elemTopOffset + "px"}, 
+			$("html, body").animate(
+				{
+					scrollTop: elemTopOffset + "px"
+				}, 
 				1000,
 				"easeInOutSine"
 			);
