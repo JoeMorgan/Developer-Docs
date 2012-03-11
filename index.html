@@ -58,7 +58,7 @@
 								<a href="#HTML5" title="HTML5">HTML5</a>
 								<ul>
 									<li><a href="#HTML5-shim" title="Making HTML5 Work">Making HTML5 Work</a></li>
-									<li><a href="#laymans-HTML5" title="The Layman's HTML5">The Layman's HTML5</a></li>
+									<li><a href="#HTML5-friends" title="HTML5 and Friends">HTML5 and Friends</a></li>
 								</ul>
 							</li>							
 							<li><a href="#XHTML-syntax" title="XHTML Syntax">XHTML Syntax</a></li>
@@ -125,7 +125,7 @@
 					<li>				
 						<h2 id="doctype">Doctype</h2>
 						<p>
-							The doctype is how a browser makes sense of the HTML content of a page. Over the years doctypes have taken many forms, usually long and cumbersome:
+							The doctype is how a browser makes sense of the HTML content of a page. Over the years, there have been many different doctypes. They are usually long and cumbersome:
 						</p>
 				
 						<figure>
@@ -138,7 +138,7 @@
 						</figure>	
 											
 						<p>
-							Here are some points to remember about doctypes:
+							Here are some points to remember when dealing with doctypes:
 						</p>
 						<ul>
 							<li>
@@ -146,13 +146,13 @@
 								<ul>
 									<li>
 										<p>
-											If this is not the case, older versions of IE will go into quirks mode, which can cause many different and hard to track issues
+											If this is not the case, older versions of IE will go into quirks mode, which can cause many strange and difficult to troubleshoot issues
 										</p>
 									</li>
 									<li>
 										<p>
 											If a server-side language is rendering the page, code may show up above the doctype (as with a PHP page that does a server-side 
-											include at the top of the page), as long as this code does not render anything
+											include at the top of the page), as long as this code does not render anything in the final HTML output
 										</p>
 									</li>
 								</ul>
@@ -165,7 +165,7 @@
 						</ul>
 						
 						<p>
-							<strong>These days, it is becoming a standard practice to use the HTML5 doctype, even if other HTML5 features aren't being used. It is simply:</strong>
+							<strong>It is becoming a standard practice to use the HTML5 doctype, even if other HTML5 features aren't being used. It is simply:</strong>
 						</p>
 			
 						<figure>
@@ -184,37 +184,36 @@
 					<li>
 						<h2 id="HTML5">HTML5</h2>
 						<p>
-							HTML5 is <del>the new hotness</del> a new version of HTML and XHTML. The HTML5 draft specification defines a single language that can be written in HTML and XML. 
+							HTML5 is <del>the new hotness</del> <del>a new</del> the lastest version of HTML and XHTML. The HTML5 draft specification defines a single language that can be written in HTML and XML. 
 							It attempts to solve issues found in previous iterations of HTML and addresses the needs of Web Applications, an area previously not adequately 
 							covered by HTML.
 						</p>
 						
 							<h3 id="HTML5-shim">Making HTML5 Work</h3>
 							<p>
-								The new semantic elements available in HTML5 are great, but there's one major issue to fix before you can use them: Internet Explorer (below version 9) won't let 
-								display unrecognized elements correctly. 
+								The new semantic elements available in HTML5 are helpful&mdash;they make markup more readable, both by humans and machines&mdash;but there's one major issue to fix before you can use them: 
+								Internet Explorer (below version 9) won't display unrecognized elements correctly. 
 							</p>
 							<p>	
 								Luckily, if you create an unknown element with JavaScript,	even without inserting it into the DOM, this problem
 								magically goes away. Many small JavaScript utilities exist that do this, among many other things. 
-								<a href="http://www.modernizr.com/" target="_blank" title="Modernizr">Modernizr</a> and <a href="http://headjs.com/" target="_blank" title="Head JS script loader">Head JS</a> 
-								are some good examples.
+								<a href="http://www.modernizr.com/" target="_blank" title="Modernizr">Modernizr</a>, which uses <a href="https://github.com/aFarkas/html5shiv#readme" target="_blank" title="HTML5 Shiv">HTML5 Shiv</a> 
+								under the hood, is the most popular example.
 							</p>
 							<p>
 								Mark Pilgrim of Dive Into HTML5 goes into 
 								<a href="http://diveintohtml5.info/semantics.html#unknown-elements" target="_blank" title="Dive Into HTML5 on unknown elements">some detail about all of this here</a>.
 							</p>
 							
-							<h3 id="laymans-HTML5">The Layman's HTML5</h3>
+							<h3 id="HTML5-friends">HTML5 and Friends</h3>
 							<p>
-								When non-developers talk about HTML5, they are usually referring to HTML5 along with a whole boatload of related specifications that make
-								up the "modern web" movement. A comprehensive list of these technologies (along with some slightly dated information about which browsers support
-								them) 
-								<a href="http://www.findmebyip.com/litmus/" target="_blank" title="List of HTML5 technologies">can be found here</a>. 
+								When people talk about HTML5, they are usually referring to the 75 or so related features and specifications that make
+								up the "modern web" movement. A comprehensive list of these technologies (along with browser support and usage recommendations) can be found at  
+								<a href="http://html5please.com/" target="_blank" title="HTML5 Please">html5please.com</a>. 
 							</p>
 							<p>
-								While we encourage the adoption of new technologies, the recommendation is to do what makes sense for your project. If your team wants to explore
-								the possibility of leveraging the <code>&lt;canvas&gt;</code> element (for example) to do some cool animations and interactions, that's great. Just make sure
+								While the adoption of new technologies is encouraged, the recommendation is to do what makes sense for your project. If your team wants to explore
+								the possibility of leveraging the <code>&lt;canvas&gt;</code> element (for example) to do some rich animations and interactions, that's awesome. Just make sure
 								of the following:
 							</p>
 							<dl>
@@ -230,7 +229,7 @@
 								<dd>
 									<p>
 										Most clients require us to support browsers that don't yet handle HTML5 technologies; make sure that everyone knows that there will be a 
-										baseline experience for these browsers, with additional functionality for those browsers that can handle it
+										baseline experience for these browsers, with additional functionality for those browsers that can handle it (this is called progressive enhancement)
 									</p>
 								</dd>
 								
@@ -238,15 +237,15 @@
 								<dd>
 									<p>
 										Having different experiences for different browsers requires increased collaboration between the development team and the design team; make 
-										the design team aware of this fact
+										sure that the creative and project leadership are aware of this fact
 									</p>
 								</dd>
 								
 								<dt>Budget and Deadlines</dt>
 								<dd>
 									<p>
-										Increased technical complexity, multiple versions of one experience, and increased back-and-forth with designers all take time; make sure that
-										all of this is baked into your level of effort estimates
+										Increased technical complexity, multiple versions of one experience, and increased back-and-forth with designers all take time; ensure that
+										all of this is baked into your estimates regarding level of effort and confidence in meeting deadlines
 									</p>
 								</dd>
 							</dl>
@@ -266,13 +265,13 @@
 							</li>
 							<li>
 								<p>
-									flexible and stable&ndash;HTML5 allows XHTML syntax, but XHTML does not allow HTML syntax; this means that the doctype can be changed between 
+									flexible and stable&mdash;HTML5 allows XHTML syntax, but XHTML does not allow HTML syntax; this means that the doctype can be changed between 
 									the two types without worry of causing syntax-related issues
 								</p>
 							</li>
 							<li>
 								<p>
-									familiar&ndash;both to interactive developers and to back-end developers who are used to working with XML
+									familiar&mdash;both to interactive developers and to back-end developers who are used to working with XML
 								</p>
 							</li>
 						</ul>
@@ -430,14 +429,14 @@
 							
 							<p>
 								It is important that your HTML document be well organized and contain elements that follow a formal structure. This makes it readable 
-								both to humans who aren’t necessarily seeing the visual experience of the page (such as a blind user who is using a screen reader), 
+								both to humans who aren't necessarily seeing the visual experience of the page (such as a blind user who is using a screen reader), 
 								and to the machines that read every page on the internet (like the bots employed by Google to determine search results).
 							</p>
 								
 								<h4 id="header-tags">Header Tags in HTML5 and XHTML</h4>
 								
 								<p>
-									Regardless of what doctype is being used, one of the best ways to make sure that your document has a correct outline is to use header tags correctly.
+									Regardless of the doctype being used, one of the best ways to make sure that your document has a correct outline is to properly use header tags.
 								</p>
 								
 								<p>
@@ -459,22 +458,22 @@
 								</p>
 								
 								<p>
-									HTML5 introduces the concept of “sections” in documents, and each section can have an <code>&lt;h1&gt;</code> element, followed by the rest of the headers. 
+									HTML5 introduces the concept of "sections" in documents, and each section can have an <code>&lt;h1&gt;</code> element, followed by the rest of the headers. 
 									For a fantastic explanation of semantics in HTML5, and the header elements in particular, see 
-									<a href="http://diveintohtml5.org/semantics.html#header-element" target="_blank" title="Header element discussed">this article by Mark Pilgrim</a> over at 
-									<a href="http://diveintohtml5.org" target="_blank" title="diveintohtml5.org">diveintohtml5.org</a>.
+									<a href="http://diveintohtml5.info/semantics.html#header-element" target="_blank" title="Header element discussed">this article by Mark Pilgrim</a> over at 
+									<a href="http://diveintohtml5.info" target="_blank" title="diveintohtml5.info">diveintohtml5.info</a>.
 								</p>
 							
 							<h3 id="tables-for-data">Use Tables for Tabular Data (Only)</h3>
 							
 							<p>
-								For years, HTML tables have been used to visually lay out elements on a page. At first, this was necessary, as there was no other way of creating 
-								many common page layouts. The practice continued even after CSS made table-less layout possible because developers were used to using tables and knew 
-								how to do it, and it can be quite difficult to get the hang of using CSS for complex layouts.
+								For years, HTML tables had been used to visually lay out elements on a page. At first, this was necessary, as there was no other way of creating 
+								many common page layouts. The practice continued even after CSS made table-less layout possible because developers were used to tables, and 
+								it can be difficult to get the hang of using CSS for complex layouts.
 							</p>
 								
 							<p>
-								Nowadays, there are no layouts that can’t be built by using CSS. Unless you need to display tabular data in rows and columns, tables should not be 
+								Using modern techniques, there are no layouts that can't be built by using CSS. Unless you need to display tabular data in rows and columns, tables should not be 
 								used. This is for a number of reasons:
 							</p>	
 									
@@ -482,12 +481,12 @@
 								<li>
 									<p>
 										Tables are not good for accessibility; screen readers have a hard time wading through numerous tables, table bodies, table rows, and table cells. 
-										Imagine listening to a screen reader saying “table cell” over and over again when you’re just trying to read the content of a page
+										Imagine listening to a screen reader saying "table cell" over and over again when you're just trying to read the content of a page
 									</p>
 								</li>
 								<li>
 									<p>
-										All of the aforementioned elements can take a toll on a webpage; Excess markup can hurt a page’s search engine optimization (which is best 
+										All of the aforementioned elements can take a toll on a webpage; Excess markup can hurt a page's search engine optimization (which is best 
 										expressed as relevant content vs. page weight), JavaScript performance, page download time, and page render time
 									</p>
 								</li>
@@ -505,21 +504,21 @@
 							<p>
 								<code>&lt;div&gt;</code> tags are useful block level elements for organizing sections of code (especially when something like a <code>&lt;section&gt;</code>
 								or <code>&lt;article&gt;</code> wouldn't really make sense), but too often developers moving away from table-based layout think that divs do something more 
-								than that&ndash;they don’t. 
+								than that&mdash;they don't. 
 							</p>		
 								
 							<p>
-								If your markup has divs within divs within divs, take a step back and ask yourself what you’re really trying to accomplish with these elements. There may
+								If your markup has divs within divs within divs, take a step back and ask yourself what you're really trying to accomplish with these elements. There may
 								be a more semantically appropriate way to meet your needs.
 							</p>		
 							<p>
-								Back in 20009, Smashing Magazine (which is a great resource for all aspects of web design and development) 
+								Back in 2009, Smashing Magazine (which is a great resource for all aspects of web design and development) 
 								<a href="http://www.smashingmagazine.com/2009/04/08/from-table-hell-to-div-hell/" target="_blank" title="Smashing Magazine">posted an article</a> 
 								that dives deeply into the topic of "divitis".
 							</p>
 							
 							<p>
-								More generally speaking, keeping the number of elements on a page to a minimum is a good practice for optimizing the page’s performance. 
+								More generally speaking, keeping the number of elements on a page to a minimum is a good practice for optimizing the page's performance. 
 								Read about this in <a href="http://developer.yahoo.com/performance/rules.html#min_dom" target="_blank" title="Yahoo! developer docs">Yahoo!'s developer documentation</a>. 
 							</p>
 					</li>
@@ -546,7 +545,7 @@
 						<p>
 							The reason for the latter is that a browser, when it encounters an <code>&lt;image&gt;</code> tag, will initiate the download of the image, and then 
 							move on to the next element in the HTML page. If the <code>height</code> and <code>width</code> attributes were specified in the HTML, the browser 
-							knows what size placeholder to put in for the image as it is downloading and doesn’t have to look back.
+							knows what size placeholder to put in for the image as it is downloading and doesn't have to look back.
 						</p>
 						
 						<p>
