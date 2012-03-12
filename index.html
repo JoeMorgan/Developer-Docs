@@ -35,7 +35,7 @@
 			<header>
 				<hgroup>
 					<h1>Interactive Development Best Practices</h1>
-					<h2>Joe Morgan | <time datetime="20011-03-15">March 15, 2011</time></h2>				
+					<h2>Joe Morgan | <time datetime="20011-03-15">March 11, 2012</time></h2>				
 				</hgroup>	
 				
 				<p>
@@ -73,7 +73,7 @@
 									<li><a href="#avoid-unnecessary-elements" title="Avoid Unnecessary Elements">Avoid Unnecessary Elements</a></li>
 								</ul>
 							</li>
-							<li><a href="#unnecessary-classes" title="Avoid Unnecessary Classes and IDs">Avoid Unnecessary Classes and IDs</a></li>
+							<li><a href="#unnecessary-classes" title="Unnecessary Classes and IDs">Unnecessary Classes and IDs</a></li>
 							<li><a href="#image-tags" title="Image Tags">Image Tags</a></li>
 							<li><a href="#miscellaneous-guidelines" title="Miscellaneous Guidelines">Miscellaneous Guidelines</a></li>
 						</ul>
@@ -467,26 +467,27 @@
 							<h3 id="tables-for-data">Use Tables for Tabular Data (Only)</h3>
 							
 							<p>
-								For years, HTML tables had been used to visually lay out elements on a page. At first, this was necessary, as there was no other way of creating 
+								For years, HTML tables had been used to visually lay out elements on a page. This was necessary at first, as there was no other way of creating 
 								many common page layouts. The practice continued even after CSS made table-less layout possible because developers were used to tables, and 
 								it can be difficult to get the hang of using CSS for complex layouts.
 							</p>
 								
 							<p>
-								Using modern techniques, there are no layouts that can't be built by using CSS. Unless you need to display tabular data in rows and columns, tables should not be 
-								used. This is for a number of reasons:
+								Using modern techniques, there are no layouts that can't be built by using CSS. Unless you need to display tabular data in rows and columns, 
+								<strong>tables should not be used</strong>. This is for a number of reasons:
 							</p>	
 									
 							<ul>
 								<li>
 									<p>
-										Tables are not good for accessibility; screen readers have a hard time wading through numerous tables, table bodies, table rows, and table cells. 
-										Imagine listening to a screen reader saying "table cell" over and over again when you're just trying to read the content of a page
+										Tables are not good for accessibility; in order to describe a set of tabular data, screen readers have to wade through numerous 
+										bodies, rows, headers, and cells; imagine listening to a screen reader saying "table cell" over and over again when you're just 
+										trying to read the content of a page
 									</p>
 								</li>
 								<li>
 									<p>
-										All of the aforementioned elements can take a toll on a webpage; Excess markup can hurt a page's search engine optimization (which is best 
+										All of the aforementioned elements can take a toll on a webpage; Excess markup can hurt a page's search engine ranking (which is best 
 										expressed as relevant content vs. page weight), JavaScript performance, page download time, and page render time
 									</p>
 								</li>
@@ -504,7 +505,7 @@
 							<p>
 								<code>&lt;div&gt;</code> tags are useful block level elements for organizing sections of code (especially when something like a <code>&lt;section&gt;</code>
 								or <code>&lt;article&gt;</code> wouldn't really make sense), but too often developers moving away from table-based layout think that divs do something more 
-								than that&mdash;they don't. 
+								than that&ndash;they don't. 
 							</p>		
 								
 							<p>
@@ -523,17 +524,20 @@
 							</p>
 					</li>
 					<li>					
-						<h2 id="unnecessary-classes">Avoid Unnecessary Classes and IDs</h2>
+						<h2 id="unnecessary-classes">Unnecessary Classes and IDs</h2>
 						
 						<p>
-							Some developers will give an ID or a class (or worse, both) to every element in the HTML. This can not only make the source of the page difficult 
-							to read, but all of those extra characters that need to be downloaded by the browser add up, and result in slightly slower page loading times.
+							It is sometimes tempting to add <code>class</code> attributes to any element that needs to be styled. When taken to the extreme, each element ends up with its own <code>class</code>. 
+							This can not only make the source of the page difficult to read, but all of those extra characters need to be downloaded by the browser, resulting in slower page loads.
 						</p>
-						
 						<p>
-							As a best practice, wait to assign a class or ID to an element until you know that you need it. This isn't to say not to use them at all, of course. 
-							The CSS parser has an easier time applying rules to a class-based ancestral selector than one that just uses a generic tag name, so don't be stingy 
-							with classes when it makes sense to use them. 
+							As a best practice, wait to assign a <code>class</code> or <code>id</code> to an element until you know that you need it. This isn't to say not to use them at all, of course. 
+							Appropriate usage of classes is fundamental to writing modular CSS, and the CSS parser has an easier time applying rules to class-based ancestral 
+							selectors than to generic tag names. So don't be stingy with classes when it makes sense to use them. 
+						</p>
+						<p>
+							A case can be made for avoiding the use of <code>id</code> attributes altogether, since they are difficult to override in the cascade. 
+							See <a href="css.html#writing-good-selectors" title="Writing good selectors">writing good selectors</a> for more information.
 						</p>
 					</li>
 					<li>					
@@ -602,7 +606,7 @@
 							</li>
 							<li>
 								<p>
-									Do not use the size attribute on input fields. The size attribute is relative to the font-size of the text inside the input; Instead use the CSS 
+									Do not use the <code>size</code> attribute on input fields. The <code>size</code> attribute is relative to the font-size of the text inside the input; Instead use the CSS 
 									<code>width</code> property; It is often best to use CSS <code>width</code> and <code>height</code> for <code>&lt;textarea&gt;</code> elements, as well,
 									since it can be difficult to match the dimensions of the design while using the <code>cols</code> and <code>rows</code> attributes
 								</p>
