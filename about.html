@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+	<head>
+		<link href="css/main.css" media="screen" rel="stylesheet" />
+<!--[if gte IE 6]>
+    <![if IE 7]>
+        <link href="css/ie7.css" media="screen" rel="stylesheet" />
+    <![endif]>
+    <![if IE 8]>
+        <link href="css/ie8.css" media="screen" rel="stylesheet" />
+    <![endif]>
+<![endif]-->		
+		<meta charset="utf-8" />	
+		<meta content="" name="keywords"/>
+		<meta content="" name="description"/>	
+		<title>Interactive Development Best Practices</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		
+		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
+		<script src="js/head.min.js"></script>
+		<script>
+			head.js(
+				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"},	// jQuery from the Google CDN
+				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
+				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
+			);					
+		</script>			
+	</head>
+	
+	<body>
+		<div class="main-container">
+			<header>
+				<hgroup>
+					<h1>Interactive Development Best Practices</h1>
+					<h2>Joe Morgan | <time datetime="20011-03-15">March 11, 2012</time></h2>				
+				</hgroup>	
+				<p>
+					Documenting best practices for interactive development is an exhaustive task, and is one that, if done effectively, would fill the pages of 
+					several books. The purpose of this guide is not to provide an all-encompassing list of best practices, but to highlight many of the most 
+					important components of a stable, high performance web page.
+				</p>
+			</header>
+			<nav>
+				<h1>Navigate This Document</h1>
+				<ul>
+					<li class="active">
+						<a class="top-level" href="about.html" title="About">About</a>
+					</li>
+					<li>
+						<a class="top-level" href="index.html" title="HTML">HTML</a>
+						<ul class="second-level">
+							<li><a href="#doctype" title="Doctype">Doctype</a></li>
+							<li>
+								<a href="#HTML5" title="HTML5">HTML5</a>
+								<ul>
+									<li><a href="#HTML5-shim" title="Making HTML5 Work">Making HTML5 Work</a></li>
+									<li><a href="#HTML5-friends" title="HTML5 and Friends">HTML5 and Friends</a></li>
+								</ul>
+							</li>							
+							<li><a href="#XHTML-syntax" title="XHTML Syntax">XHTML Syntax</a></li>
+							<li><a href="#validation" title="HTML Validation">HTML Validation</a></li>
+							<li><a href="#deprecated" title="Avoid Deprecated Elements">Avoid Deprecated Elements</a></li>
+							<li>
+								<a href="#semantics" title="Semantics">Semantics</a>
+								<ul>
+									<li><a href="#document-outline" title="Document Outline">Document Outline</a></li>
+									<li><a href="#header-tags" title="Header Tags in HTML5 and XHTML">Header Tags in HTML5 and XHTML</a></li>
+									<li><a href="#tables-for-data" title="Use Tables for Tabular Data">Use Tables for Tabular Data</a></li>
+									<li><a href="#avoid-unnecessary-elements" title="Avoid Unnecessary Elements">Avoid Unnecessary Elements</a></li>
+								</ul>
+							</li>
+							<li><a href="#unnecessary-classes" title="Unnecessary Classes and IDs">Unnecessary Classes and IDs</a></li>
+							<li><a href="#image-tags" title="Image Tags">Image Tags</a></li>
+							<li><a href="#miscellaneous-guidelines" title="Miscellaneous Guidelines">Miscellaneous Guidelines</a></li>
+						</ul>
+					</li>
+					<li>
+						<a class="top-level" href="images.html" title="Images">Images</a>
+						<ul class="second-level">
+							<li><a href="#image-size" title="Image Size">Image Size</a></li>
+							<li><a href="#image-format" title="Image Formats">Image Formats</a></li>
+							<li><a href="#CSS-sprites" title="Leverage CSS Sprites">Leverage CSS Sprites</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="css.html" title="CSS">CSS</a>
+						<ul class="second-level">
+							<li><a href="#inline-styles" title="Inline Styles">Inline Styles</a></li>
+							<li><a href="#external-css" title="Place All CSS Within the &lt;head&gt;">Place All CSS Within the <code>&lt;head&gt;</code></a></li>
+							<li><a href="#combine-stylesheets" title="Combine CSS Files">Combine CSS Files</a></li>
+							<li><a href="#link-vs-import" title="Use &lt;link&gt; to Include CSS, Not @import">Use <code>&lt;link&gt;</code> to Include CSS, Not <code>@import</code></a></li>
+							<li><a href="#reset" title="Use a CSS Reset">Use a CSS Reset</a></li>
+							<li><a href="#font-sizes" title="Specifying Font Sizes">Specifying Font Sizes</a></li>
+							<li><a href="#writing-good-selectors" title="Writing Good Selectors">Writing Good Selectors</a></li>
+							<li><a href="#shorthand" title="Shorthand">Shorthand</a></li>
+						</ul>					
+					</li>
+					<li>
+						<a class="top-level" href="javascript.html" title="JavaScript">JavaScript</a>
+						<ul class="second-level">
+							<li><a href="#use-external-js" title="Restrict JavaScript to External Files">Restrict JavaScript to External Files</a></li>
+							<li>
+								<a href="#place-external-js" title="Placement of External JavaScript Files">Placement of External JavaScript Files</a>
+								<ul>
+									<li><a href="#end-of-page" title="Include JavaScript near the end of the page">Include JavaScript near the end of the page</a></li>
+									<li><a href="#js-loader" title="Use a JavaScript loader">Use a JavaScript loader</a></li>
+								</ul>
+							</li>	
+							<li><a href="#use-jquery" title="Use jQuery">Use jQuery</a></li>
+							<li><a href="#organize-code" title="Organize Your Code">Organize Your Code</a></li>
+							<li><a href="#general-js" title="General Coding Practices">General Coding Practices</a></li>
+						</ul>					
+					</li>
+				</ul>
+			</nav>
+			<section id="HTML">
+				<h1>About</h1>
+				<ul class="recs">
+					<li>
+						<h2>What is this about?</h2>
+						<p>
+							In short this is about writing <a href="http://books.google.com/books?id=_i6bDeoCQzsC&amp;printsec=frontcover&amp;dq=clean+code&amp;hl=en&amp;sa=X&amp;ei=nzCdT6HyCsqM0QHP9tmKDw&amp;ved=0CDYQ6AEwAA#v=onepage&amp;q=clean%20code&amp;f=false">clean code</a>.
+						</p>
+						<p>
+							As Bjarne Stroustrup, inventor of the C++ language put it:
+						</p>
+						<blockquote cite="http://books.google.com/books?id=_i6bDeoCQzsC&amp;lpg=PP1&amp;dq=clean%20code&amp;pg=PT49#v=onepage&amp;q&amp;f=false">
+							I like my code to be elegant and efficient. The logic should be straightforward to make it hard
+							for bugs to hide, the dependancies minimal to ease maintenance, error handling complete
+							according to an articulated strategy, and performance close to optimal so as not to tempt
+							people to make the code messy with unprincipled optimizations. Clean code does one
+							thing well.
+						</blockquote>
+						<p>
+							Thus it is our responsibility as professional programmers to ensure the code being written
+							meets certain industry standards that are both elegant and efficient.
+						</p>
+					</li>
+					<li>
+						<h2>Goals of this Initiative</h2>
+						<p>
+							Our goal is to provide industry powered best practices that help teams deliver consistent code.
+						</p>
+						<p>
+							In the end each team should be able to to follow a consistent coding style with conventions that:
+						</p>
+						<ul>
+							<li>Eases' the maintenance of legacy code</li>
+							<li>Lower's the risk of software bugs and errors</li>
+							<li>Ensure's page load, performance and maintainable code</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</div>	
+			
+		
+		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
+		<script src="js/syntax-highlighter.js"></script>	
+	</body> 
+</html>
