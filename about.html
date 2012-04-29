@@ -5,14 +5,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
 	<head>
 		<link href="css/main.css" media="screen" rel="stylesheet" />
-<!--[if gte IE 6]>
-    <![if IE 7]>
-        <link href="css/ie7.css" media="screen" rel="stylesheet" />
-    <![endif]>
-    <![if IE 8]>
-        <link href="css/ie8.css" media="screen" rel="stylesheet" />
-    <![endif]>
-<![endif]-->		
+		
 		<meta charset="utf-8" />	
 		<meta content="" name="keywords"/>
 		<meta content="" name="description"/>	
@@ -35,7 +28,7 @@
 			<header>
 				<hgroup>
 					<h1>Interactive Development Best Practices</h1>
-					<h2>Joe Morgan | <time datetime="20011-03-15">March 11, 2012</time></h2>				
+					<h2><time datetime="20012-04-29">April 29, 2012</time></h2>				
 				</hgroup>	
 				<p>
 					Documenting best practices for interactive development is an exhaustive task, and is one that, if done effectively, would fill the pages of 
@@ -46,9 +39,6 @@
 			<nav>
 				<h1>Navigate This Document</h1>
 				<ul>
-					<li class="active">
-						<a class="top-level" href="about.html" title="About">About</a>
-					</li>
 					<li>
 						<a class="top-level" href="index.html" title="HTML">HTML</a>
 						<ul class="second-level">
@@ -114,15 +104,23 @@
 							<li><a href="#general-js" title="General Coding Practices">General Coding Practices</a></li>
 						</ul>					
 					</li>
+					<li class="active">
+						<a class="top-level" href="about.html" title="About">About</a>
+						<ul class="second-level">
+							<li><a href="#summary" title="Purpose">Purpose</a></li>
+							<li><a href="#goals" title="Goals">Goals</a></li>
+							<li><a href="#contributors" title="Contributors">Contributors</a></li>
+						</ul>						
+					</li>					
 				</ul>
 			</nav>
 			<section id="HTML">
 				<h1>About</h1>
 				<ul class="recs">
 					<li>
-						<h2>What is this about?</h2>
+						<h2 id="summary">What Is This About?</h2>
 						<p>
-							In short this is about writing <a href="http://books.google.com/books?id=_i6bDeoCQzsC&amp;printsec=frontcover&amp;dq=clean+code&amp;hl=en&amp;sa=X&amp;ei=nzCdT6HyCsqM0QHP9tmKDw&amp;ved=0CDYQ6AEwAA#v=onepage&amp;q=clean%20code&amp;f=false">clean code</a>.
+							In short, this documentation aims to encourage <a href="http://books.google.com/books?id=_i6bDeoCQzsC&amp;printsec=frontcover&amp;dq=clean+code&amp;hl=en&amp;sa=X&amp;ei=nzCdT6HyCsqM0QHP9tmKDw&amp;ved=0CDYQ6AEwAA#v=onepage&amp;q=clean%20code&amp;f=false">clean code</a>.
 						</p>
 						<p>
 							As Bjarne Stroustrup, inventor of the C++ language put it:
@@ -135,22 +133,68 @@
 							thing well.
 						</blockquote>
 						<p>
-							Thus it is our responsibility as professional programmers to ensure the code being written
-							meets certain industry standards that are both elegant and efficient.
+							It is our responsibility as professional programmers to ensure that all code that we produce
+							meets these same standards.
 						</p>
 					</li>
 					<li>
-						<h2>Goals of this Initiative</h2>
+						<h2 id="goals">Goals of this Initiative</h2>
 						<p>
-							Our goal is to provide industry powered best practices that help teams deliver consistent code.
+							Our goal is to provide industry driven best practices that help teams deliver consistent, high quality code.
 						</p>
 						<p>
-							In the end each team should be able to to follow a consistent coding style with conventions that:
+							In the end, each team should be able to to follow a consistent coding style with conventions that:
 						</p>
 						<ul>
-							<li>Eases' the maintenance of legacy code</li>
-							<li>Lower's the risk of software bugs and errors</li>
-							<li>Ensure's page load, performance and maintainable code</li>
+							<li>
+								<p>
+									Ease the maintenance of legacy code
+								</p>
+							</li>
+							<li>
+								<p>
+									Lower the risk of software bugs and errors
+								</p>
+							</li>
+							<li>
+								<p>
+									Ensure optimized page load, high performance, and maintainable code
+								</p>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2 id="contributors">Contributors</h2>
+						<p>
+							This documentation was originally compiled from multiple sources on the subject of development standards, including
+							<a href="http://na.isobar.com/standards/" title="Isobar's Front-end Code Standards &amp; Best Practices">Isobar's Front-end Code Standards &amp; Best Practices</a>,
+							<a href="https://developers.google.com/speed/docs/best-practices/rules_intro" title="Google's Web Performance Best Practices">Google's Web Performance Best Practices</a>,
+							and <a href="http://developer.yahoo.com/performance/rules.html" title="Yahoo's Developer Network">Yahoo's Developer Network</a> (among many others).
+						</p>
+						<p>
+							This work would not exist without the individual contributions of these fine human beings:
+						</p>
+						<ul>
+							<li>
+								<p>
+									<strong>Joe Morgan</strong>, Manager of Interactive Development at SapientNitro (creator and editor)
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong>Alvin Crespo</strong>, Senior Associate, Interactive Development at SapientNitro (contributor)
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong>Rob Larsen</strong>, Senior Manager of Interactive Development at Sapient Global Markets (resident guru)
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong>Milos Veljkovic</strong>, Senior Associate, Interactive Development at SapientNitro (contributor)
+								</p>
+							</li>
 						</ul>
 					</li>
 				</ul>
