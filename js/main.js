@@ -4,12 +4,12 @@
 // Tells the browser to use ES5 strict mode, if supported; WARNING: MAKE SURE YOU UNDERSTAND THE IMPLICATIONS OF THIS BEFORE INCLUDING
 "use strict";
 
-// Since page specific code will likely make use of a JS library, make sure it doesn't execute until the library has downloaded and executed 
-head.ready("library", function() {
-	(function($, window, document){
-		var theContainer = $(".main-container");
-		
-		
+define(
+	["jquery", "domReady!"],
+	function($){
+		var theContainer = $(".main-container"),
+			windowRef = $(window);
+
 		/**
 		 * Finds a content element based on the href attribute of the clicked link
 		 * @param	{Object}	node	A reference to the clicked link (not a jQuery object)
@@ -50,9 +50,10 @@ head.ready("library", function() {
 
 	
 		function fixNav(){
-			var windowHeight	= window.height(),
+			var windowHeight	= windowRef.height(),
 				nav				= theContainer.find("nav > ul"),
 				navHeight		= nav.height();
+
 			if(navHeight > windowHeight){
 				nav.addClass("not-fixed");
 			}else{
@@ -60,8 +61,8 @@ head.ready("library", function() {
 			}
 		}
 		fixNav();
-		window.bind("resize", fixNav);
-
-	}(jQuery, jQuery(window), window.document));	
-});
+		
+		windowRef.bind("resize", fixNav);
+	}
+);
 

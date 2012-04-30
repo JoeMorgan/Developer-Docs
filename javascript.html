@@ -11,15 +11,24 @@
 		<meta content="" name="description"/>	
 		<title>Interactive Development Best Practices</title>
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-		
-		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
-		<script src="js/head.min.js"></script>
+
+		<script src="js/modernizr.js"></script>			
+		<script src="js/curl.js"></script>
 		<script>
-			head.js(
-				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"},	// jQuery from the Google CDN
-				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
-				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
-			);						
+			define.amd.jQuery = true;
+			curl(
+				{
+					baseUrl: "js",
+					paths: {
+						"jquery" : "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min"
+					}
+				}, 
+				[
+					"jquery", 
+					"jquery.easing.1.3",
+					"main"
+				]
+			);					
 		</script>			
 	</head>
 	
@@ -28,7 +37,7 @@
 			<header>
 				<hgroup>
 					<h1>Interactive Development Best Practices</h1>
-					<h2>Joe Morgan | <time datetime="20011-03-15">March 15, 2011</time></h2>				
+					<h2><time datetime="20012-04-29">April 29, 2012</time></h2>				
 				</hgroup>	
 				
 				<p>
@@ -128,9 +137,13 @@
 						<h2 id="use-external-js">Restrict JavaScript to External Files</h2>
 						
 						<p>
-							Avoiding inline JavaScript is even more critical than avoiding inline CSS, and for many of the same reasons. This goes for code
-							included within <code>&lt;script&gt;</code> elements, and <strong>double</strong> for things like <code>onClick</code> attributes.
-							The former may be permissible in certain circumstances, but the latter never is.
+							Avoiding inline JavaScript is even more critical than avoiding inline CSS. Including code within <code>&lt;script&gt;</code> 
+							elements is sometimes permissible for certain rare use cases, but keep in mind that this has a negative impact on SEO, and increases
+							the filesize of the HTML without the benefit of caching or compression.
+						</p>
+						<p>
+							JavaScript event attributes (such as <code>onclick</code> or <code>onload</code>) and JavaScript included within the <code>href</code> attribute of an anchor tag
+							should <strong>never</strong> be used.
 						</p>
 						<p>
 							A full discussion of this topic can be found 
@@ -138,8 +151,8 @@
 						</p>
 						<p>
 							It should be noted that HTML comments within <code>&lt;script&gt;</code> elements are no longer necessary. None of the browsers 
-							that required this hack are still around, so put this practice to rest. On a related note, the <code>type</code> attribute, 
-							required in HTML4, is no longer necessary in HTML5.
+							that required this hack are still in use. Similarly, the <code>type</code> attribute and the practice of enclosing JavaScript
+							within a CDATA section, required in HTML4 and XHTML, are no longer necessary in HTML5.
 						</p>
 					</li>
 					<li>	
@@ -151,100 +164,100 @@
 							a couple of common ways of dealing with it.
 						</p>
 							
-							<h3 id="end-of-page">Include JavaScript near the end of the page</h3>
-							
-							<p>
-								The most common method of dealing with JavaScript blocking is to include JavaScript at the end of your HTML document, just prior to the 
-								closing <code>&lt;/body&gt;</code> tag. This also helps to ensure that the DOM elements of the page have already been loaded prior to 
-								JavaScript execution (so technically, you can omit the event that normally watches for the DOM to be ready, though it's often included
-								anyway; this way, if the JavaScript include is moved, things don't break).
-							</p>
-							<p>
-								One of the problems that can arise with this method is you may have code that needs to execute as early as possible in the page rendering
-								process. Having some JavaScript included in the <code>&lt;head&gt;</code> of the document and some near the bottom of the <code>&lt;/body&gt;</code>
-								can be bad for maintainability, and can also cause issues if there are dependencies between the two sets of code.
-							</p>
-							<p>
-								When including JavaScript with <code>&lt;script&gt;</code> elements at the bottom of the page, it is important to minimize the number
-								of different JavaScript files being loaded. This becomes less important	when using a script loader.
-							</p>
-							
-							<h3 id="js-loader">Use a JavaScript loader</h3>
-							
-							<p>
-								A recent trend in the web development world is to use a JavaScript loader to bring in all of your external script files. A good script loader
-								can end up being the only JavaScript that you include in the traditional fashion, with all other files being called in through the loader's API.
-							</p>
-							<p>
-								Script loaders provide many benefits; they can:
-							</p>
-							<ul>
-								<li>
-									<p>
-										Load scripts like images, which load separately from the page rendering process (i.e., are non-blocking)
-									</p>
-								</li>
-								<li>
-									<p>
-										Provide dependency management, so that scripts can be loaded in parallel, but executed <em>in order</em> (huge performance gains here)
-									</p>
-								</li>
-								<li>
-									<p>
-										Provide callback functions to script loads, ready functions that can execute on a script-by-script basis, and much more
-									</p>
-								</li>
-							</ul>
-							
-							<p>
-								A comparison of some of the more popular script loaders can be found in this 
-								<a href="https://spreadsheets.google.com/ccc?key=0Aqln2akPWiMIdERkY3J2OXdOUVJDTkNSQ2ZsV3hoWVE&amp;hl=en#gid=2" target="_blank" title="Comparison of script loaders">Google spreadsheet</a>.
-							</p>
-							
-							<p>
-								<a href="http://headjs.com/" id="head-js" target="_blank" title="Head JS script loader">Head JS</a> is one example that does much of the above, and in addition performs
-								many of the duties of a popular script called Modernizr. Head JS acts as a shim for HTML5, so that HTML5 elements will display correctly in 
-								Internet Explorer. It appends classes to the <code>&lt;html&gt;</code> element that indicate whether the user's browser supports various CSS3 features
-								(and does the same thing for the user's browser and screen size), so that styles can be written accordingly.
-							</p>
-							<p>
-								This page uses Head JS to load most of the page's JavaScript in the fastest way possible (and even allows us to load scripts in the <code>&lt;head&gt;</code> 
-								of the document). 
-							</p>
-		
-							<figure>
-								<figcaption class="code-label">Using Head JS looks like this</figcaption>		
-								<script class="brush: css" type="syntaxhighlighter">
-									<![CDATA[
-										&lt;script src="js/head.min.js"&gt;&lt;/script&gt;
-										&lt;script&gt;
-											head.js(
-												{"WebFont": "http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"}, 		
-												{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"},
-												{"js/main.js"}
-											);
-											head.ready("WebFont", function() {
-												WebFont.load({
-													custom: {
-														families: ['SapientSansBoldRegular'],
-														urls: ['css/fonts/sapientSansBoldRegular.css']
-													}
-												});
-											});					
-										&lt;/script&gt;						]]>
-								</script>
-							</figure>								
-							<p>
-								Note that the syntax highlighting JavaScript used on this page is loaded at the bottom of the page with a traditional <code>&lt;script&gt;</code> tag, 
-								because even though Head JS was loading and executing the SyntaxHighlighter code in order, the code snippets weren't displaying correctly in Chrome 
-								(I suspect that this is due to the organization and compression of the SyntaxHighlighter components). This is a good example of an instance where a blend 
-								of the two methods described above was the best approach.
-							</p>
+						<h3 id="end-of-page">Include JavaScript near the end of the page</h3>
+						
+						<p>
+							The most common method of dealing with JavaScript blocking is to include JavaScript at the end of your HTML document, just prior to the 
+							closing <code>&lt;/body&gt;</code> tag. This also helps to ensure that the DOM elements of the page have already been loaded prior to 
+							JavaScript execution (so technically, you can omit event handlers that watch for the page to be loaded or for the DOM to be ready when 
+							including scripts in this fashion).
+						</p>
+						<p>
+							If there is code that needs to execute prior to DOM elements being rendered (such as code that modifies the <code>class</code> attribute of
+							the <code>html</code> element, it may still be loaded in the <code>head</code> of the document.
+						</p>
+						<p>
+							When including JavaScript with <code>&lt;script&gt;</code> elements at the bottom of the page, it is important to minimize the number
+							of different JavaScript files being loaded. This becomes less important	when using a script loader.
+						</p>
+						
+						<h3 id="js-loader">Use a JavaScript loader</h3>
+						
+						<p>
+							A recent trend in the web development world is to load JavaScript files asynchronously. The <code>async</code> and <code>defer</code>
+							attributes (described <a href="https://developer.mozilla.org/en/HTML/Element/script#Attributes" title="Mozilla Developer Network">here</a>) 
+							are meant to provide this functionality, but there are issues with both that prevent them from being a total solution.
+						</p>
+						<p>	
+							Until such a time as browsers can provide asynchronous loading and dependency management natively (expect this with 
+							<a href="https://mail.mozilla.org/pipermail/es-discuss/2008-August/006837.html" title="ECMAScript Harmony">ES Harmony</a>), 
+							it is necessary to use a script loader.	A good script loader can end up being the only JavaScript that you include in the 
+							traditional fashion, with all other files being called in through the loader's API. For an approach that combines the benefits 
+							of a script loader with the built-in advantages of <code>async</code> and <code>defer</code>, check out 
+							<a href="http://unscriptable.com/2011/09/21/what-is-the-fastest-way-to-load-amd-modules" title="Unscriptable">this article</a>.
+						</p>
+						<p>
+							Script loaders provide many benefits; they can:
+						</p>
+						<ul>
+							<li>
+								<p>
+									Load scripts like images, which load separately from the page rendering process (i.e., are non-blocking)
+								</p>
+							</li>
+							<li>
+								<p>
+									Provide dependency management, so that scripts can be loaded in parallel, but executed <em>in order</em> (huge performance gains here)
+								</p>
+							</li>
+							<li>
+								<p>
+									Provide callback functions to script loads, ready functions that can execute on a script-by-script basis, and much more
+								</p>
+							</li>
+						</ul>
+						
+						<p>
+							A comparison of some of the more popular script loaders can be found in this 
+							<a href="https://spreadsheets.google.com/ccc?key=0Aqln2akPWiMIdERkY3J2OXdOUVJDTkNSQ2ZsV3hoWVE&amp;hl=en#gid=2" target="_blank" title="Comparison of script loaders">Google spreadsheet</a>.
+							Note that this spreadsheet is no longer maintained.
+						</p>
+
+						<p>
+							This page uses curl.js to load JavaScript in the fastest way possible (and even allows us to load scripts in the <code>&lt;head&gt;</code> 
+							of the document). One advantage to curl.js is that it follows the CommonJS AMD (asynchronous module definition) specification. This increases
+							the portability of application code and ensures a consistent interface that even translates well into the realm of the server (with Node.js).
+						</p>
+	
+						<figure>
+							<figcaption class="code-label">Using curl.js looks like this</figcaption>		
+							<script class="brush: css" type="syntaxhighlighter">
+								<![CDATA[
+									&lt;script src="js/curl.js"&gt;&lt;/script&gt;
+									&lt;script&gt;
+										define.amd.jQuery = true;
+										curl(
+											{
+												baseUrl: "js",
+												paths: {
+												  "jquery":"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min"
+												}
+											}, 
+											[
+												"jquery", 
+												"jquery.easing.1.3",
+												"syntax-highlighter",
+												"main"
+											]
+										); 					
+									&lt;/script&gt;						]]>
+							</script>
+						</figure>								
 					</li>	
 					<li>
 						<h2 id="use-jquery">Use jQuery</h2>
 						<p>
-							In depth knowledge of the JavaScript language and the ability to perform common tasks without an AJAX library is strongly 
+							In depth knowledge of the JavaScript language and the ability to perform common tasks without a JavaScript library is strongly 
 							encouraged. That said, it isn't realistic or efficient to start from scratch for every project, and JavaScript libraries are 
 							invaluable for their ability to simplify common functionality, like DOM manipulation and AJAX requests.
 						</p>
@@ -256,12 +269,12 @@
 						<p>
 							If there is already a different JavaScript framework in place for your project (Mootools, Dojo, YUI3, etc), you should make every
 							effort to work within the API provided by that framework and <strong>do not</strong> include jQuery or another such library unless
-							it is absolutely necessary to complete your work. AJAX libraries are very similar in terms of the types of functionality they offer, 
+							it is absolutely necessary to complete your work. Libraries are very similar in terms of the types of functionality they offer, 
 							and they are very large in file size. Including more than one is a wasteful use of your users' bandwidth.
 						</p>
 						<p>
 							When including jQuery (or another library), you may want to consider linking to a file on a content delivery network, 
-							like the one provided by Google: <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" target="_blank" title="Google CDN version of jQuery">http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</a>.
+							like the one provided by Google: <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" target="_blank" title="Google CDN version of jQuery">http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js</a>.
 							Using a CDN provides a number of benefits: the file usually originates from a server near to the user geographically, will download concurrently with 
 							other scripts (because it's coming from a different domain), and often benefits from caching, since multiple web sites all point to the same URI.
 						</p>
@@ -278,6 +291,10 @@
 							<li>
 								<p>
 									<a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth" target="_blank" title="Ben Cherry - Module pattern">Module pattern</a>
+								</p>
+							<li>
+								<p>
+									<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">Asynchronous Module Definition (AMD)</a>
 								</p>
 							</li>
 							<li>
@@ -403,11 +420,8 @@
 					</li>
 				</ul>
 			</section>
-
+			<!-- Syntax highlighter was written with its own CommonJS considerations that get in the way of AMD, so I'm loading it traditionally here -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="js/syntax-highlighter.js"></script><!--<![endif]-->			
 		</div>	
-			
-		
-		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
-		<script src="js/syntax-highlighter.js"></script>	
 	</body> 
 </html>	

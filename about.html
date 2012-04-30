@@ -12,14 +12,24 @@
 		<title>Interactive Development Best Practices</title>
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		
-		<!-- head.js allows for parallel JavaScript file loading, but maintains execution order (also has other functionality built-in) -->
-		<script src="js/head.min.js"></script>
+		<script src="js/modernizr.js"></script>			
+		<script src="js/curl.js"></script>
 		<script>
-			head.js(
-				{"library": "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"},	// jQuery from the Google CDN
-				{"easing": "js/jquery.easing.1.3.js"},											// jQuery easing plugin
-				"js/main.js"																	// Load a file for application specific JavaScript, if necessary												
-			);					
+			define.amd.jQuery = true;
+			curl(
+				{
+					baseUrl: "js",
+					paths: {
+						"jquery" : "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min"
+					}
+				}, 
+				[
+					"jquery", 
+					"jquery.easing.1.3",
+					"syntax-highlighter",
+					"main"
+				]
+			); 					
 		</script>			
 	</head>
 	
@@ -169,7 +179,8 @@
 							This documentation was originally compiled from multiple sources on the subject of development standards, including
 							<a href="http://na.isobar.com/standards/" title="Isobar's Front-end Code Standards &amp; Best Practices">Isobar's Front-end Code Standards &amp; Best Practices</a>,
 							<a href="https://developers.google.com/speed/docs/best-practices/rules_intro" title="Google's Web Performance Best Practices">Google's Web Performance Best Practices</a>,
-							and <a href="http://developer.yahoo.com/performance/rules.html" title="Yahoo's Developer Network">Yahoo's Developer Network</a> (among many others).
+							<a href="http://developer.yahoo.com/performance/rules.html" title="Yahoo's Developer Network">Yahoo's Developer Network</a>,
+							and <a href="https://developer.mozilla.org/en-US/" title="Mozilla's Developer Network">Mozilla's Developer Network</a> (among many others).
 						</p>
 						<p>
 							This work would not exist without the individual contributions of these fine human beings:
@@ -200,9 +211,7 @@
 				</ul>
 			</section>
 		</div>	
-			
-		
-		<!-- SyntaxHighlighter loaded without Head JS because it was experiencing some unexplained issues in Chrome -->
-		<script src="js/syntax-highlighter.js"></script>	
+			<!-- Syntax highlighter was written with its own CommonJS considerations that get in the way of AMD, so I'm loading it traditionally here -->
+<!--[if (gt IE 9)|!(IE)]><!--><script src="js/syntax-highlighter.js"></script><!--<![endif]-->		
 	</body> 
 </html>

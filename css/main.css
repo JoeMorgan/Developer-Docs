@@ -291,6 +291,10 @@ figure{
 	margin:0 0 15px;
 	padding:0 0 9px;
 }
+.ie8 figure,
+.ie7 figure{
+	display:none;
+}
 figcaption{
 	background:#bae8f2;
 	display:block;
