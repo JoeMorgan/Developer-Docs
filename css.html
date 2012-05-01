@@ -26,10 +26,12 @@
 				[
 					"jquery", 
 					"jquery.easing.1.3",
+					"domReady!",
+					"rainbow",
 					"main"
 				]
-			); 					
-		</script>			
+			);					
+		</script>				
 	</head>
 	
 	<body>
@@ -141,11 +143,8 @@
 						</p>
 						
 						<figure>
-							<figcaption class="code-label">Inline styling</figcaption>		
-							<script type="syntaxhighlighter" class="brush: xml">
-								<![CDATA[
-									<p style="color:red; font-size:1.4em;">Wrong way to style</p> 				]]>
-							</script>
+							<figcaption class="code-label">Inline styling</figcaption>	
+<pre><code data-language="html">&lt;p style="color:red; font-size:1.4em;"&gt;Wrong way to style&lt;/p&gt;		</code></pre>								
 						</figure>
 						
 						<p>
@@ -210,11 +209,8 @@
 							
 	
 						<figure>
-							<figcaption class="code-label">The <code>&lt;link&gt;</code> method</figcaption>		
-							<script type="syntaxhighlighter" class="brush: xml">
-								<![CDATA[
-									<link rel='stylesheet' href='css/main.css'>		]]>
-							</script>
+							<figcaption class="code-label">The <code>&lt;link&gt;</code> method</figcaption>	
+<pre><code data-language="html">&lt;link rel='stylesheet' href='css/main.css'&gt;		</code></pre>						
 						</figure>
 													
 						<p>
@@ -223,12 +219,9 @@
 	
 						<figure>
 							<figcaption class="code-label">The @import method</figcaption>		
-							<script type="syntaxhighlighter" class="brush: css">
-								<![CDATA[
-									<style>
-										@import url('a.css');
-									</style>							]]>
-							</script>
+<pre><code data-language="html">&lt;style&gt;
+    @import url('a.css');
+&lt;/style&gt;		</code></pre>							
 						</figure>					
 						<p>
 							Steve Souders, author of 
@@ -281,20 +274,17 @@
 							the following styles:
 						</p>
 						<figure>
-							<figcaption class="code-label">Example of using ems to support text resizing in IE6</figcaption>		
-							<script type="syntaxhighlighter" class="brush: css">
-								<![CDATA[
-										body{
-											font-size:0.625em;			/* equivalent to 10px */
-										}
-										p{ 
-											font-size:1.2em; 			/* equivalent to 12px */
-											line-height:1.25em;			/* relative to the p font size, so 15px */
-										}
-										h1{ 
-											font-size:1.8em; 			/* equivalent to 18px */
-										}							]]>
-							</script>
+							<figcaption class="code-label">Example of using ems to support text resizing in IE6</figcaption>
+<pre><code data-language="css">body{
+    font-size:0.625em;          /* equivalent to 10px */
+}
+p{ 
+    font-size:1.2em;            /* equivalent to 12px */
+    line-height:1.25em;         /* relative to the p font size, so 15px */
+}
+h1{ 
+    font-size:1.8em;            /* equivalent to 18px */
+}</code></pre>									
 						</figure>	
 					</li>
 					<li>
@@ -309,22 +299,19 @@
 							Let's use the following set of selectors as a reference to illustrate these concepts:
 						</p>
 						<figure>
-							<figcaption class="code-label">CSS selector examples</figcaption>		
-							<script type="syntaxhighlighter" class="brush: css">
-								<![CDATA[
-										.highlight{					
-											color:blue;
-										}
-										span.highlight{
-											color:red;
-										}
-										#note-section .highlight{
-											color:yellow;
-										}
-										div.footer .highlight{
-											color:green;
-										}							]]>
-							</script>
+							<figcaption class="code-label">CSS selector examples</figcaption>	
+<pre><code data-language="css">.highlight{					
+    color:blue;
+}
+span.highlight{
+    color:red;
+}
+#note-section .highlight{
+    color:yellow;
+}
+div.footer .highlight{
+    color:green;
+}</code></pre>								
 						</figure>	
 						<p>
 							If we were to assume that browsers parsed as we read, from left to right, then we would think that each of these selectors
@@ -451,7 +438,5 @@
 			</section>
 
 		</div>
-			<!-- Syntax highlighter was written with its own CommonJS considerations that get in the way of AMD, so I'm loading it traditionally here -->
-<!--[if (gt IE 9)|!(IE)]><!--><script src="js/syntax-highlighter.js"></script><!--<![endif]-->			
 	</body> 
 </html>	

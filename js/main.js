@@ -5,7 +5,7 @@
 "use strict";
 
 define(
-	["jquery", "domReady!"],
+	["jquery"],
 	function($){
 		var theContainer = $(".main-container"),
 			windowRef = $(window);

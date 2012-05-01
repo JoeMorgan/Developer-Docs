@@ -4,7 +4,7 @@ The goal in hosting these docs ([rendered][]) on Github is to allow for their ev
 
 ## Credits ##
 
-Contributions by [Ryan Fitzer][], [Rob Larsen][], and [Milos Veljkovic][]
+Contributions by [Ryan Fitzer][], [Rob Larsen][], [Milos Veljkovic][], and [Alvin Crespo][]
 
 Originally compiled from multiple sources on the subject of development standards, including:
 
@@ -16,6 +16,7 @@ Originally compiled from multiple sources on the subject of development standard
 [Ryan Fitzer]:https://github.com/ryanfitzer/
 [Rob Larsen]:https://github.com/roblarsen/
 [Milos Veljkovic]:https://github.com/milosv/
+[Alvin Crespo]:https://github.com/alvincrespo/
 [Isobar's]:http://na.isobar.com/
 [Front-end Code Standards & Best Practices]:http://na.isobar.com/standards/
 [issue]:Developer-Docs/issues/
